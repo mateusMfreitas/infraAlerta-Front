@@ -1,0 +1,52 @@
+import React, { useState } from 'react';
+import './login.css';
+
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Aqui você pode lidar com a lógica de login
+    console.log(`Username: ${username}, Password: ${password}`);
+  };
+
+  return (
+    <div className="Login">
+  <header className="Login-header">
+    <form onSubmit={handleSubmit} className="Box">
+      <h1>InfraAlerta</h1>
+      <h2>Login to your account</h2>
+      <div className="email-container">
+        <label htmlFor="email">E-mail</label>
+        <input
+          id="email"
+          type="text"
+          placeholder="Enter your e-mail"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div className="password-container">
+        <label htmlFor="password">Password</label>
+        <a href="/forgot-password" className="forgot-link">Forgot?</a>
+        <input
+          id="password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="button" onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? "🙈" : "👁️"}
+        </button>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </header>
+</div>
+  );
+}
+
+export default Login;
