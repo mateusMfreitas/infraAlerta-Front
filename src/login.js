@@ -8,7 +8,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aqui você pode lidar com a lógica de login
+    // link com API
     console.log(`Username: ${username}, Password: ${password}`);
   };
 
@@ -39,7 +39,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="button" onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? "🙈" : "👁️"}
+          {showPassword ? "👁️" : "👁️"}
         </button>
       </div>
       <button type="submit">Login</button>
