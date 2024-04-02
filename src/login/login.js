@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import './login.css';
 import { Link } from 'react-router-dom';
+import './login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -40,9 +40,12 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="button" onClick={() => setShowPassword(!showPassword)}>
+        
+        <button className="v" type="button" onClick={() => setShowPassword(!showPassword)}>
           {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
         </button>
+        
+        
         <a href="/forgot-password" className="forgot-link">Forgot your Password?</a>
       </div>
       <button type="submit">Login</button>
