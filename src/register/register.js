@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+/*import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';*/
 import './register.css';
 
 function Register() {
@@ -16,7 +16,7 @@ function Register() {
   const [district, setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  /*const [showPassword, setShowPassword] = useState(false);*/
 
   const handleSubmit = (event) => {
     event.preventDefault();
