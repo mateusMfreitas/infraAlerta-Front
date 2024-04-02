@@ -47,11 +47,15 @@
   
   .password-container button {
     position: absolute;
-    right: 20px;
-    top: 50%;
+    right: 1px; 
+    top: calc(50% - 5px);
     transform: translateY(-50%);
     background: none;
     border: none;
+  }
+
+  .password-container button:hover {
+    opacity: 0.8;
     cursor: pointer;
   }
   
@@ -61,10 +65,28 @@
     border-radius: 4px;
     background-color: #007BFF;
     color: #fff;
+  }
+
+  .Box button:hover[type="submit"]{
     cursor: pointer;
+    opacity: 0.8;
   }
 
   .forgot-link {
-    float: right;
-    margin-right: 10px; 
+    display: block; 
+    margin-top: 10px; 
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .register-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .register-link a {
+    color: #007BFF;
+    text-decoration: none;
   }

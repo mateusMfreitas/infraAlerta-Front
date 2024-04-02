@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './login.css';
 
 function Login() {
@@ -13,7 +15,7 @@ function Login() {
   };
 
   return (
-    <div className="Login">
+  <div className="Login">
   <header className="Login-header">
     <form onSubmit={handleSubmit} className="Box">
       <h1>InfraAlerta</h1>
@@ -30,7 +32,6 @@ function Login() {
       </div>
       <div className="password-container">
         <label htmlFor="password">Password</label>
-        <a href="/forgot-password" className="forgot-link">Forgot?</a>
         <input
           id="password"
           type={showPassword ? "text" : "password"}
@@ -39,10 +40,14 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="button" onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? "👁️" : "👁️"}
+          {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
         </button>
+        <a href="/forgot-password" className="forgot-link">Forgot your Password?</a>
       </div>
       <button type="submit">Login</button>
+      <p className="register-link">
+        Don't have an account? <a href="/register">Register</a>
+      </p>
     </form>
   </header>
 </div>
