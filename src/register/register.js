@@ -27,7 +27,7 @@ function Register() {
   return (
   <div className="Register">
   <header className="Register-header">
-    <form onSubmit={handleSubmit} className="Box">
+    <form onSubmit={handleSubmit} className="Box_Register">
         <h1>InfraAlerta</h1>
         <h2>Register your account</h2>
 
