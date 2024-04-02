@@ -41,7 +41,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         
-        <button className="v" type="button" onClick={() => setShowPassword(!showPassword)}>
+        <button type="button" onClick={() => setShowPassword(!showPassword)}>
           {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
         </button>
         
