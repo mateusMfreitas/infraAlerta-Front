@@ -2,7 +2,7 @@
   height: 100vh;
   background-color: #050A24;
 }
-.Box {
+.Register-header {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -12,12 +12,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.Box label {
+.Box_Register label {
   display: flex;
   margin-bottom: 5px;
 }
 
-.Box input {
+.Box_Register input {
   width: 90%;
   padding: 10px;
   margin-bottom: 10px;
@@ -25,7 +25,7 @@
   border-radius: 4px;
 }
 
-.Box button {
+.Box_Register button {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
@@ -35,7 +35,7 @@
   cursor: pointer;
 }
 
-.Box button:hover {
+.Box_Register button:hover {
   background-color: #0056b3;
 }
 
