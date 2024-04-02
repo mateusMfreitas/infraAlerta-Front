@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import './login.css';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // link com API
-    console.log(`Username: ${username}, Password: ${password}`);
+    console.log(`email: ${email}, Password: ${password}`);
   };
 
   return (
@@ -27,8 +27,8 @@ function Login() {
           id="email"
           type="text"
           placeholder="Enter your e-mail"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="password-container">
