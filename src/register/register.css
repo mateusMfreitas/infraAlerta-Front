@@ -12,6 +12,17 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.Box_Register h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3563E9 ;
+}
+
+.Box_Register h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .Box_Register label {
   display: flex;
   margin-bottom: 5px;
