@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import './login.css';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // link com API
-    console.log(`Username: ${username}, Password: ${password}`);
+    console.log(`email: ${email}, Password: ${password}`);
   };
 
   return (
@@ -26,8 +27,8 @@ function Login() {
           id="email"
           type="text"
           placeholder="Enter your e-mail"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="password-container">
@@ -39,14 +40,17 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        
         <button type="button" onClick={() => setShowPassword(!showPassword)}>
           {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
         </button>
+        
+        
         <a href="/forgot-password" className="forgot-link">Forgot your Password?</a>
       </div>
       <button type="submit">Login</button>
       <p className="register-link">
-        Don't have an account? <a href="/register">Register</a>
+        Don't have an account? <Link to="/register">Register</Link>
       </p>
     </form>
   </header>
