@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './forgotPassword.css';
+import api from '../services/api';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // link com API
+    try{
+      const response = await api.post('http://localhost:5025/login/forgotPassword', {
+        email: email
+      })
+        .then((response) => {
+          //teste
+          alert(response);
+        })
+        console.log(`email: ${email}`);
+    } catch (error){
+        console.error(error);
+        //teste
+        alert("Erro ao enviar email!")
+      }
     console.log(`email: ${email}`);
   };
 
