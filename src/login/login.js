@@ -3,16 +3,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './login.css';
+import axios from 'axios';
+import api from '../services/api';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // link com API
-    console.log(`email: ${email}, Password: ${password}`);
+    try{
+      const response = await api.post('http://localhost:5025/login/auth', {
+        email: email,
+        password: password
+      })
+        .then((response) => {
+          setUser(Response.data);
+          //teste
+          alert("Logado!")
+        })
+        console.log(response);
+        console.log(`email: ${email}, Password: ${password}`);
+    } catch (error){
+        console.error(error);
+        //teste
+        alert("Erro ao logar!")
+      }
   };
 
   return (
