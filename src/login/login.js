@@ -45,8 +45,7 @@ function Login() {
           {showPassword ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
         </button>
         
-        
-        <a href="/forgot-password" className="forgot-link">Forgot your Password?</a>
+        <Link to="/forgot-password" className="forgot-link">Forgot your Password?</Link>
       </div>
       <button type="submit">Login</button>
       <p className="register-link">
