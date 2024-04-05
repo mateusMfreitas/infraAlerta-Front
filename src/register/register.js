@@ -75,7 +75,7 @@ function Register() {
         <label htmlFor="password">Senha</label>
         <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-        <label htmlFor="password"> Coinfirme sua senha</label>
+        <label htmlFor="password"> Confirme sua senha</label>
         <input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
 
         <label htmlFor="cpf">CPF</label>
