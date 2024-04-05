@@ -1,10 +1,10 @@
-.Problema {
+.Problem {
     text-align: center;
     margin-top: 70px;
   }
   
   
-  .Problema-form {
+  .Problem-form {
     width: 60%;
     margin: 0 auto;
     padding: 20px;
@@ -12,7 +12,7 @@
     background-color: #f8f9fa; 
   }
   
-  .Problema-form h1 {
+  .Problem-form h1 {
     margin-bottom: 20px;
   }
   
@@ -60,8 +60,8 @@
     padding: 20px;
     border-radius: 10px;
     background-color: #7fc08d; 
-    color: #fff; /* Texto branco */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   }
   
   .success-message h1 {
@@ -78,14 +78,14 @@
   }
   
   .success-message button:hover {
-    background-color: #c9cac9; /* Cor mais clara ao passar o mouse */
+    background-color: #c9cac9;
   }
   
   body {
     position: relative;
   }
   
-  body:not(.Problema) {
+  body:not(.Problem) {
     background-color: #050A24;
   }
   
