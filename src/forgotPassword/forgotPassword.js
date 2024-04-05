@@ -37,7 +37,7 @@ function ForgotPassword() {
         <input
           id="email"
           type="text"
-          placeholder="Entre com seu e-mail"
+          placeholder="Digite o seu e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
