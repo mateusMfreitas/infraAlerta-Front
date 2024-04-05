@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 /*import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';*/
 import './register.css';
+import api from '../services/api';
 
 function Register() {
   const [name, setName] = useState('');
@@ -18,10 +19,42 @@ function Register() {
   const [state, setState] = useState('');
   /*const [showPassword, setShowPassword] = useState(false);*/
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // link com API
-    console.log(`Username: ${email}, Password: ${password}`);
+  const handleSubmit = async (event) => {
+    event.preventDefault(); 
+    if (password !== confirmPassword){
+      console.log('Senhas não coincidem!');
+      return alert('Senhas não coincidem!');
+    }
+    try{
+      const response = await api.post('http://localhost:5025/user/createUser', {
+        user: {
+          name: name,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword,
+          cpf: cpf,
+          phone: phone,
+          birthDate: birthDate,
+        },
+        userAddress: {
+          ua_address: address,
+          ua_number: number,
+          ua_neighborhood: district,
+          ua_city: city,
+          ua_state: state
+        }
+      })
+        .then((response) => {
+          console.log(response);
+          //teste
+          alert("Usuário criado!");
+        })
+        console.log(response);
+    } catch (error){
+        console.error(error);
+        //teste
+        alert("Erro ao criar conta!");
+      }
   };
 
   return (
@@ -43,7 +76,7 @@ function Register() {
         <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
         <label htmlFor="password"> Confirm your Password</label>
-        <input id="password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+        <input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
 
         <label htmlFor="cpf">CPF</label>
         <input id="cpf" type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} required />
