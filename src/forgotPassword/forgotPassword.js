@@ -30,21 +30,21 @@ function ForgotPassword() {
   <header className="ForgotPassword-header">
     <form onSubmit={handleSubmit} className="Box-Forgot">
       <h1>InfraAlerta</h1>
-      <h2>Reset your   password</h2>
-      <h4>Enter the email you want to reset your password to.</h4>
+      <h2>Redefina sua senha</h2>
+      <h4>Digite o e-mail para qual deseja redefinir sua senha.</h4>
       <div className="forgot-email-container">
         <label htmlFor="email">E-mail</label>
         <input
           id="email"
           type="text"
-          placeholder="Enter your e-mail"
+          placeholder="Entre com seu e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <button type="submit">Reset Password</button>
+      <button type="submit">Redefina sua senha</button>
       <p className="back-link">
-        <Link to="/login">Back to Login</Link>
+        <Link to="/login">Voltar para Login</Link>
       </p>
     </form>
   </header>
