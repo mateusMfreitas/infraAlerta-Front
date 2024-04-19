@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import './login.css';
 import axios from 'axios';
 import api from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,18 +20,18 @@ function Login() {
       const response = await api.post('http://localhost:5025/login/auth', {
         email: email,
         password: password
-      })
-        .then((response) => {
-          setUser(Response.data);
-          //teste
-          alert("Logado!")
-        })
-        console.log(response);
-        console.log(`email: ${email}, Password: ${password}`);
+      });
+
+      const userData = response.data;
+      setUser(userData);
+
+      if(userData.admin === true){
+        navigate('/dashboardAdm');
+      } else{
+        navigate('/dashboard');
+      }
     } catch (error){
         console.error(error);
-        //teste
-        alert("Erro ao logar!")
       }
   };
 
