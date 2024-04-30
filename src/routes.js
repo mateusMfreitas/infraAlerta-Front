@@ -3,13 +3,14 @@ import Login from "./login/login";
 import Register from "./register/register";
 import Problem from "./problem/problem";
 import ForgotPassword from "./forgotPassword/forgotPassword";
+import Background from "./pages/Background/index";
 
 function AppRoutes() {
     return(
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={<Background/>} />
                 <Route path="/login" element={<Login/>} />
-                <Route path="/" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route path="/problem" element={<Problem/>} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
@@ -17,5 +18,4 @@ function AppRoutes() {
         </BrowserRouter>
     );
 }
-
 export default AppRoutes;
