@@ -1,0 +1,23 @@
+.nav-bar {
+    position: fixed;
+    margin-top: -10%;
+}
+
+
+.title-nav {
+    color: #3563E9 ;
+}
+
+.title-menu {
+    color: #94a7cb ;
+}
+
+.search {
+    border-radius: calc(1em + 0.25rem);
+    font-family:Arial, FontAwesome;
+}
+
+.container-fluid {
+    padding: 0;
+    overflow-x: hidden;
+}
