@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import api from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/Logo.png';
+import { Link } from 'react-router-dom';
 
 function Register() {
   const [name, setName] = useState('');
@@ -119,7 +120,9 @@ function Register() {
           </div>
 
           <button type="submit" className=" mt-3 btn btn-primary btn-block">Registre-se</button>
-      
+          <p className="text-center mt-3">
+            <Link to="/login">Voltar para Login</Link>
+          </p>
         </form>
       </div>
     </div>
