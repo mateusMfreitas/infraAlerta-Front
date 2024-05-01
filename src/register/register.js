@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-/*import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';*/
-import './register.css';
 import api from '../services/api';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from '../assets/Logo.png';
+import { Link } from 'react-router-dom';
 
 function Register() {
   const [name, setName] = useState('');
@@ -17,7 +17,6 @@ function Register() {
   const [district, setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  /*const [showPassword, setShowPassword] = useState(false);*/
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
@@ -43,74 +42,90 @@ function Register() {
           ua_city: city,
           ua_state: state
         }
-      })
-        .then((response) => {
+      }).then((response) => {
           console.log(response);
-          //teste
           alert("Usuário criado!");
-        })
+        });
         console.log(response);
     } catch (error){
         console.error(error);
-        //teste
         alert("Erro ao criar conta!");
-      }
+    }
   };
 
   return (
-  <div className="Register">
-  <header className="Register-header">
-    <form onSubmit={handleSubmit} className="Box_Register">
-        <h1>InfraAlerta</h1>
-        <h2>Resgistre sua conta</h2>
+    <div className="container vh-100 d-flex justify-content-center align-items-center">
+      <div className="w-100" style={{maxWidth: '600px'}}>
+        <form onSubmit={handleSubmit} className="p-4 bg-white shadow rounded">
+          <div className="text-center">
+            <img src={logo} alt="InfraAlerta" width="150" />  
+          </div>
+          
+          <h2 className="text-center mb-4">Registre sua conta</h2>
+          
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label htmlFor="name">Nome</label>
+                <input type="text" className="form-control" id="name" value={name} onChange={e => setName(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" className="form-control" id="email" value={email} onChange={e => setEmail(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Senha</label>
+                <input type="password" className="form-control" id="password" value={password} onChange={e => setPassword(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirme sua senha</label>
+                <input type="password" className="form-control" id="confirmPassword" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="cpf">CPF</label>
+                <input type="text" className="form-control" id="cpf" value={cpf} onChange={e => setCpf(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Celular</label>
+                <input type="tel" className="form-control" id="phone" value={phone} onChange={e => setPhone(e.target.value)} required />
+              </div>
+            </div>
 
-        <div className="form-row">
-      <div className="form-column">
-        <label htmlFor="name">Nome</label>
-        <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+            <div className="col-md-6">
+              <div className="form-group">
+                <label htmlFor="birthDate">Data de Nascimento</label>
+                <input type="date" className="form-control" id="birthDate" value={birthDate} onChange={e => setBirthDate(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Endereço</label>
+                <input type="text" className="form-control" id="address" value={address} onChange={e => setAddress(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="number">Número</label>
+                <input type="number" className="form-control" id="number" min="0" value={number} onChange={e => setNumber(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="district">Bairro</label>
+                <input type="text" className="form-control" id="district" value={district} onChange={e => setDistrict(e.target.value)} required />              
+              </div>
+              <div className="form-group">
+                <label htmlFor="city">Cidade</label>
+                <input type="text" className="form-control" id="city" value={city} onChange={e => setCity(e.target.value)} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="state">Estado</label>
+                <input type="text" className="form-control" id="state" value={state} onChange={e => setState(e.target.value)} required />
+              </div>
+            </div>
+          </div>
 
-        <label htmlFor="email">Email</label>
-        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-
-        <label htmlFor="password">Senha</label>
-        <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-
-        <label htmlFor="password"> Confirme sua senha</label>
-        <input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-
-        <label htmlFor="cpf">CPF</label>
-        <input id="cpf" type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} required />
-
-        <label htmlFor="phone">Celular</label>
-        <input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-
-      </div>
-
-      <div className="form-column">
-        <label htmlFor="birthDate">Data de Nascimento</label>
-        <input id="birthDate" type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
-
-        <label htmlFor="address">Endereço</label>
-        <input id="address" type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
-
-        <label htmlFor="number">Número</label>
-        <input id="number" type="number" value={number} onChange={(e) => setNumber(e.target.value)} required />
-
-        <label htmlFor="district">Bairro</label>
-        <input id="district" type="text" value={district} onChange={(e) => setDistrict(e.target.value)} required />
-
-        <label htmlFor="city">Cidade</label>
-        <input id="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} required />
-
-        <label htmlFor="state">Estado</label>
-        <input id="state" type="text" value={state} onChange={(e) => setState(e.target.value)} required />
+          <button type="submit" className=" mt-3 btn btn-primary btn-block">Registre-se</button>
+          <p className="text-center mt-3">
+            <Link to="/login">Voltar para Login</Link>
+          </p>
+        </form>
       </div>
     </div>
-
-      <button type="submit">Registre-se</button>
-    </form>
-  </header>
-  </div>
   );
 }
 
