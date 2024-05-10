@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import logo from '../assets/Logo.png';
 import api from '../services/api';
+import { redirect, useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +25,7 @@ function Login() {
       })
         .then((response) => {
           setUser(response.data);
-          alert("Logado!");
+          navigate('/uDashboard')          
         })
       console.log(response);
       console.log(`email: ${email}, Password: ${password}`);

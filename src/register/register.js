@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/Logo.png';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 
 function Register() {
   const [name, setName] = useState('');
@@ -17,6 +17,8 @@ function Register() {
   const [district, setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
@@ -45,6 +47,7 @@ function Register() {
       }).then((response) => {
           console.log(response);
           alert("Usuário criado!");
+          navigate('/login');
         });
         console.log(response);
     } catch (error){
