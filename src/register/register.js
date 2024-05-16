@@ -3,7 +3,6 @@ import api from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/Logo.png';
 import { Link, redirect, useNavigate } from 'react-router-dom';
-require('dotenv').config();
 
 function Register() {
   const [name, setName] = useState('');
@@ -19,7 +18,7 @@ function Register() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const navigate = useNavigate();
-  const apiBaseUrl = process.env.API_BASE_URL;
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 
   const handleSubmit = async (event) => {
