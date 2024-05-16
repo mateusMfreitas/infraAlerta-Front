@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import './navBar.css';
+import logo from '../assets/Logo.png';
 
 function NavBar() {
   const [imageUser, setImageUser] = useState('/images/image.png');
 
   return (
-    <div className='container-fluid'>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <div className='container-fluid' id="nav-bar" style={{
+      backgroundColor: 'e7e7e7f8'
+    }}>
+        <nav className="navbar navbar-expand-lg navbar-light">
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
             <a className="navbar-brand" href="/report">
-              <img src="/images/logo.png" alt="logo infraAlerta" width={100} height={100} />
+              <img src={logo} alt="logo infraAlerta" width={100} height={100} />
             </a>
 
             <div className="collapse navbar-collapse" id="navbarToggle">
@@ -22,7 +25,7 @@ function NavBar() {
               </div>
             </div>
 
-            <div className="collapse navbar-collapse ml-auto text-right justify-content-end">
+            <div className="img-user collapse navbar-collapse ml-auto text-right justify-content-end">
             <img src={imageUser} alt="foto do usuário" width={80} height={80}/>
             </div>
         </nav>

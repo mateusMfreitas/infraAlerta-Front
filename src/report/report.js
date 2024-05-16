@@ -10,17 +10,6 @@ import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare';
 
 function Report() {
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY >= 70) {
-        document.getElementById('menuLateral').style.transition = 'margin-top .5s ease';
-        document.getElementById('menuLateral').style.marginTop = '-10%';
-      } else {
-        document.getElementById('menuLateral').style.transition = 'margin-top 1s ease';
-        document.getElementById('menuLateral').style.marginTop = '0%';
-      }
-    });
-}, []);
 
   const [report, setReport] = useState([
     {
@@ -149,6 +138,96 @@ function Report() {
       state: 'SP',
       distribution: 'SEURB'
     },
+    {
+      id: 7,
+      classification: 'Urgente',
+      creation: '10/04/2024 06:01:32',
+      changed: '10/04/2024 12:15:32',
+      preview: 'Aberto',
+      title: 'Buraco na Avenida São Paulo',
+      subject: 'Foi encontrado um buraco na Avenida São Paulo, já está lá a mais de 1 mês.',
+      reporter: 'Joaquim Alves',
+      phone: '15999999',
+      email: 'teste@teste.com',
+      adrees: 'Avenida São Paulo',
+      number: '123',
+      neighborhood: 'Jardim Santa Rosália',
+      city: 'Sorocaba',
+      state: 'SP',
+      distribution: 'SEURB'
+    },
+    {
+      id: 7,
+      classification: 'Urgente',
+      creation: '10/04/2024 06:01:32',
+      changed: '10/04/2024 12:15:32',
+      preview: 'Aberto',
+      title: 'Buraco na Avenida São Paulo',
+      subject: 'Foi encontrado um buraco na Avenida São Paulo, já está lá a mais de 1 mês.',
+      reporter: 'Joaquim Alves',
+      phone: '15999999',
+      email: 'teste@teste.com',
+      adrees: 'Avenida São Paulo',
+      number: '123',
+      neighborhood: 'Jardim Santa Rosália',
+      city: 'Sorocaba',
+      state: 'SP',
+      distribution: 'SEURB'
+    },
+    {
+      id: 7,
+      classification: 'Urgente',
+      creation: '10/04/2024 06:01:32',
+      changed: '10/04/2024 12:15:32',
+      preview: 'Aberto',
+      title: 'Buraco na Avenida São Paulo',
+      subject: 'Foi encontrado um buraco na Avenida São Paulo, já está lá a mais de 1 mês.',
+      reporter: 'Joaquim Alves',
+      phone: '15999999',
+      email: 'teste@teste.com',
+      adrees: 'Avenida São Paulo',
+      number: '123',
+      neighborhood: 'Jardim Santa Rosália',
+      city: 'Sorocaba',
+      state: 'SP',
+      distribution: 'SEURB'
+    },
+    {
+      id: 7,
+      classification: 'Urgente',
+      creation: '10/04/2024 06:01:32',
+      changed: '10/04/2024 12:15:32',
+      preview: 'Aberto',
+      title: 'Buraco na Avenida São Paulo',
+      subject: 'Foi encontrado um buraco na Avenida São Paulo, já está lá a mais de 1 mês.',
+      reporter: 'Joaquim Alves',
+      phone: '15999999',
+      email: 'teste@teste.com',
+      adrees: 'Avenida São Paulo',
+      number: '123',
+      neighborhood: 'Jardim Santa Rosália',
+      city: 'Sorocaba',
+      state: 'SP',
+      distribution: 'SEURB'
+    },
+    {
+      id: 7,
+      classification: 'Urgente',
+      creation: '10/04/2024 06:01:32',
+      changed: '10/04/2024 12:15:32',
+      preview: 'Aberto',
+      title: 'Buraco na Avenida São Paulo',
+      subject: 'Foi encontrado um buraco na Avenida São Paulo, já está lá a mais de 1 mês.',
+      reporter: 'Joaquim Alves',
+      phone: '15999999',
+      email: 'teste@teste.com',
+      adrees: 'Avenida São Paulo',
+      number: '123',
+      neighborhood: 'Jardim Santa Rosália',
+      city: 'Sorocaba',
+      state: 'SP',
+      distribution: 'SEURB'
+    },
   ]);
 
   function handleRowClick(id) {
@@ -159,10 +238,10 @@ function Report() {
     <div className='container-fluid'>
       <NavBar />
       <hr />
-      <div className='row'>
+      <div className='row content'>
         <div className="col-md-3">
           <div className='menuLateral' id='menuLateral'>
-            <h4 className='m-4 title-menu'>Menu Principal</h4>
+            <h4 className='m-3 title-menu'>Menu Principal</h4>
             <div className='line text-center'>
             <span className='button-menu'><FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Painel de Controle</span>
             <span className='button-menu selected-menu'><FontAwesomeIcon icon={faMagnifyingGlass} className='mr-2 icon' />Busca Relato</span>
@@ -193,7 +272,7 @@ function Report() {
             </thead>
             <tbody>
               {report.map((item) => (
-                <tr key={item.id} onClick={() => handleRowClick(item.id)}>
+                <tr key={item.id} onClick={() => handleRowClick(item.id)} style={{ cursor: 'pointer' }}>
                   <th scope="row">#{item.id}</th>
                   <td>{item.classification}</td>
                   <td>{item.creation}</td>
@@ -213,18 +292,6 @@ function Report() {
 }
 
 export function ReportDetails() {
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY >= 70) {
-        document.getElementById('menuLateral').style.transition = 'margin-top .5s ease';
-        document.getElementById('menuLateral').style.marginTop = '-10%';
-      } else {
-        document.getElementById('menuLateral').style.transition = 'margin-top 1s ease';
-        document.getElementById('menuLateral').style.marginTop = '0%';
-      }
-    });
-}, []);
-
   const { id } = useParams();
   const [report, setReport] = useState([
     {
@@ -359,9 +426,8 @@ export function ReportDetails() {
     <div className='container-fluid'>
       <NavBar />
       <hr />
-      <hr />
       <div className="container-fluid">
-        <div className="row">
+        <div className="row content">
           <div className="col-md-3">
             <div className='menuLateral' id='menuLateral'>
               <h4 className='m-4 title-menu'>Menu Principal</h4>
@@ -379,10 +445,11 @@ export function ReportDetails() {
             </div>
           </div>
 
-            <div className="col-md-9 text-center" id="content-details">
-            <h1>#{id} - {report[id].title} </h1>
+          <div className="col-md-9 text-center" id="content-details">
             <hr />
-            
+              <h1>#{id} - {report[id].title} </h1>
+            <hr />
+
             <div className="row text-left">
               <div className="col-6">
                 <h3>Informação do relator:</h3>
@@ -422,7 +489,7 @@ export function ReportDetails() {
                   <div className='col-3 text-center'>
                     <a href="#" role="button" className="text-dark"   data-toggle="modal" data-target="#modalEdit">
                       <FontAwesomeIcon icon={faPenToSquare} /><br/>
-                      Editar<br/>
+                      Alterar Responsável<br/>
                     </a>
                   </div>
                   <div className='col-3 text-center'>
@@ -444,63 +511,60 @@ export function ReportDetails() {
         </div>
       </div>
       
-      <div className="modal fade" id="modalEdit" tabIndex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered" role="document">
+      <div className="modal fade" id="modalEdit" tabIndex="-1" aria-labelledby="editModal" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header text-center">
               <h5 className="modal-title" id="editModal">Editar Relato</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div className="modal-body">
               <div className='form-group'>
-              <form>
-                <label htmlFor="example>FormControlInput1">Assunto:</label>
-                <input type="text" className='form-control' id='input-title' placeholder='Assunto' value={report[id].title}/>
+                <form>
+                  <label htmlFor="input-title" className="form-label">Assunto:</label>
+                  <input type="text" className='form-control' id='input-title' placeholder='Assunto' value={report[id].title}/>
 
-                <label htmlFor="example>FormControlInput1">Descrição:</label>
-                <textarea className='form-control' id='input-description' placeholder='Descrição' value={report[id].subject}/>
+                  <label htmlFor="input-description" className="form-label">Descrição:</label>
+                  <textarea className='form-control' id='input-description' placeholder='Descrição' value={report[id].subject}></textarea>
 
-                <div className='row'>
-                  <div className='col-8'>
-                    <label htmlFor="example>FormControlInput1">Endereço:</label>
-                    <input type="text" className='form-control' id='input-adrees' placeholder='Endereço' value={report[id].adrees}/>
+                  <div className='row'>
+                    <div className='col-8'>
+                      <label htmlFor="input-adrees" className="form-label">Endereço:</label>
+                      <input type="text" className='form-control' id='input-adrees' placeholder='Endereço' value={report[id].adrees}/>
+                    </div>
+                    <div className='col-4'>
+                      <label htmlFor="input-number" className="form-label">Número:</label>
+                      <input type="text" className='form-control' id='input-number' placeholder='Número' value={report[id].number} />
+                    </div>
                   </div>
-                  <div className='col-4'>
-                    <label htmlFor="example>FormControlInput1">Número:</label>
-                    <input type="text" className='form-control' id='input-number' placeholder='Número' value={report[id].number} />
+                  <div className='row'>
+                    <div className='col-6'>
+                      <label htmlFor="input-neighborhood" className="form-label">Bairro:</label>
+                      <input type="text" className='form-control' id='input-neighborhood' placeholder='Bairro' value={report[id].neighborhood}/>
+                    </div>
+                    <div className='col-6'>
+                      <label htmlFor="input-city" className="form-label">Cidade:</label>
+                      <input type="text" className='form-control' id='input-city' placeholder='Cidade' value={report[id].city}/>
+                    </div>
                   </div>
-                </div>
-                <div className='row'>
-                  <div className='col-6'>
-                    <label htmlFor="example>FormControlInput1">Bairro:</label>
-                    <input type="text" className='form-control' id='input-neighborhood' placeholder='Bairro' value={report[id].neighborhood}/>
-                  </div>
-                  <div className='col-6'>
-                    <label htmlFor="example>FormControlInput1">Cidade:</label>
-                    <input type="text" className='form-control' id='input-city' placeholder='Cidade' value={report[id].city}/>
-                  </div>
-                </div>
-                
-                <label htmlFor="example>FormControlInput1">Estado:</label>
-                <input type='text' className='form-control' id='input-state' placeholder='Estado' value={report[id].state} />
+                  
+                  <label htmlFor="input-state" className="form-label">Estado:</label>
+                  <input type='text' className='form-control' id='input-state' placeholder='Estado' value={report[id].state} />
 
-                <label htmlFor="example>FormControlInput1">Responsável:</label>
-                <input type='text' className='form-control' id='input-state' placeholder='Responsável' value={report[id].reporter} />
+                  <label htmlFor="input-responsible" className="form-label">Responsável:</label>
+                  <input type='text' className='form-control' id='input-responsible' placeholder='Responsável' value={report[id].reporter} />
 
-                <label htmlFor="example>FormControlInput1">Classificação:</label>
-                <input type='text' className='form-control' id='input-state' placeholder='Classificação' value={report[id].classification}/>
+                  <label htmlFor="input-classification" className="form-label">Classificação:</label>
+                  <input type='text' className='form-control' id='input-classification' placeholder='Classificação' value={report[id].classification}/>
 
-                <label htmlFor="example>FormControlInput1">Previem:</label>
-                <input type='text' className='form-control' id='input-state' placeholder='Previem' value={report[id].preview} />
+                  <label htmlFor="input-preview" className="form-label">Previem:</label>
+                  <input type='text' className='form-control' id='input-preview' placeholder='Previem' value={report[id].preview} />
 
-              </form>
-
+                </form>
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
               <button type="button" className="btn btn-primary">Salvar mudanças</button>
             </div>
           </div>
