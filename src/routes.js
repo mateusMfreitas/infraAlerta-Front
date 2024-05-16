@@ -3,7 +3,7 @@ import Login from "./login/login";
 import Register from "./register/register";
 import Problem from "./problem/problem";
 import ForgotPassword from "./forgotPassword/forgotPassword";
-import UDashboard from "./user/uDashboard";
+import Report, { ReportDetails } from "./report/report";
 
 function AppRoutes() {
     return(
@@ -14,7 +14,8 @@ function AppRoutes() {
                 <Route path="/register" element={<Register/>} />
                 <Route path="/problem" element={<Problem/>} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
-                <Route path="/uDashboard" element={<UDashboard/>} />
+                <Route path="/report" element={<Report/>} />
+                <Route path="/report/:id" element={<ReportDetails/>} />
             </Routes>
         </BrowserRouter>
     );
