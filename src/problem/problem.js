@@ -21,7 +21,7 @@ function Problem() {
       setImage(null);
       setLocation('');
     } else {
-      alert("Por favor, preencha todos os campos para enviar o relato.");
+        alert("Por favor, preencha todos os campos para enviar o relato.");
     }
   };
 

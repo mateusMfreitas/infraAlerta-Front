@@ -3,6 +3,7 @@ import api from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/Logo.png';
 import { Link, redirect, useNavigate } from 'react-router-dom';
+require('dotenv').config();
 
 function Register() {
   const [name, setName] = useState('');
@@ -18,6 +19,7 @@ function Register() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const navigate = useNavigate();
+  const apiBaseUrl = process.env.API_BASE_URL;
 
 
   const handleSubmit = async (event) => {
@@ -27,7 +29,7 @@ function Register() {
       return alert('Senhas não coincidem!');
     }
     try{
-      const response = await api.post('http://localhost:5025/user/createUser', {
+      const response = await api.post(`${apiBaseUrl}/user/createUser`, {
         user: {
           name: name,
           email: email,
