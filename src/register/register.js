@@ -28,7 +28,7 @@ function Register() {
       return alert('Senhas não coincidem!');
     }
     try{
-      const response = await api.post(`${apiBaseUrl}/user/createUser`, {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}/user/createUser`, {
         user: {
           name: name,
           email: email,
