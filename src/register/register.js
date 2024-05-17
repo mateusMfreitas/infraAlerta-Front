@@ -59,7 +59,7 @@ function Register() {
     console.log(unformattedCpf, unformattedPhone);
 
     try{
-      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}/user/createUser`, {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}user/createUser`, {
         user: {
           name: name,
           email: email,
