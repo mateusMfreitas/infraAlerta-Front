@@ -19,16 +19,18 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}/login/auth`, {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}login/auth`, {
         email: email,
         password: password
       })
         .then((response) => {
           setUser(response.data);
-          navigate('/uDashboard')          
+          if(!response.data.admin){
+            navigate('/uDashboard');        
+          }else{
+            navigate('/aDashboard');        
+          }
         })
-      console.log(response);
-      console.log(`email: ${email}, Password: ${password}`);
     } catch (error) {
       console.error(error);
       alert("Erro ao logar!");

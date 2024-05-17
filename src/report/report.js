@@ -8,6 +8,8 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons/faTrian
 import NavBar from "../navBar/navBar";
 import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare';
+import Layout from '../layout/layout'; // Certifique-se de importar o Layout
+
 
 function Report() {
 
@@ -235,28 +237,9 @@ function Report() {
   }
 
   return (
-    <div className='container-fluid'>
-      <NavBar />
-      <hr />
-      <div className='row content'>
-        <div className="col-md-3">
-          <div className='menuLateral' id='menuLateral'>
-            <h4 className='m-3 title-menu'>Menu Principal</h4>
-            <div className='line text-center'>
-            <span className='button-menu'><FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Painel de Controle</span>
-            <span className='button-menu selected-menu'><FontAwesomeIcon icon={faMagnifyingGlass} className='mr-2 icon' />Busca Relato</span>
-            <span className='button-menu'><FontAwesomeIcon icon={faTriangleExclamation} className='mr-2 icon' />Adicionar Relato</span>
-            <span className='button-menu'><FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios</span>
-            </div>
 
-            <div className='line'>
-              <h1>Preferencias</h1>
-              <h1>Configurações</h1>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-9 text-center" style={{ display: 'flex', justifyContent: 'center' }}>
+      <Layout>
+        <div className="col-md-9 text-center" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
           <table className="table table-striped">
             <thead>
               <tr>
@@ -286,8 +269,7 @@ function Report() {
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
+      </Layout>
   );
 }
 
