@@ -20,22 +20,53 @@ function Register() {
   const navigate = useNavigate();
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
+  function removeCpfFormatting(cpf) {
+    return cpf.replace(/\D/g, ''); // Remove qualquer caractere que não seja dígito
+  }
+
+  function removePhoneFormatting(phone) {
+    return phone.replace(/\D/g, '');
+  }
+
+  const handlePhoneChange = e => {
+    const { value } = e.target;
+    let formattedPhone = value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    formattedPhone = formattedPhone.slice(0, 11); // Limita a 11 dígitos
+    formattedPhone = formattedPhone.replace(/^(\d{2})(\d)/, '($1) $2'); // Formata os dois primeiros dígitos como código de área
+    formattedPhone = formattedPhone.replace(/(\d{5})(\d)/, '$1-$2'); // Adiciona hífen após os cinco primeiros dígitos
+    setPhone(formattedPhone); // Atualiza o estado com o valor formatado
+  };
+
+  const handleCpfChange = e => {
+    const { value } = e.target;
+    let formattedCpf = value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    formattedCpf = formattedCpf.slice(0, 11); // Limita a 11 dígitos
+    formattedCpf = formattedCpf.replace(/(\d{3})(\d)/, '$1.$2');
+    formattedCpf = formattedCpf.replace(/(\d{3})(\d)/, '$1.$2');
+    formattedCpf = formattedCpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    setCpf(formattedCpf);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     if (password !== confirmPassword){
-      console.log('Senhas não coincidem!');
+      /* console.log('Senhas não coincidem!'); */
       return alert('Senhas não coincidem!');
     }
+
+    const unformattedCpf = removeCpfFormatting(cpf);
+    const unformattedPhone = removePhoneFormatting(phone);
+    console.log(unformattedCpf, unformattedPhone);
+
     try{
-      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}user/createUser`, {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}/user/createUser`, {
         user: {
           name: name,
           email: email,
           password: password,
           confirmPassword: confirmPassword,
-          cpf: cpf,
-          phone: phone,
+          cpf: unformattedCpf,
+          phone: unformattedPhone,
           birthDate: birthDate,
         },
         userAddress: {
@@ -87,11 +118,11 @@ function Register() {
               </div>
               <div className="form-group">
                 <label htmlFor="cpf">CPF</label>
-                <input type="text" className="form-control" id="cpf" value={cpf} onChange={e => setCpf(e.target.value)} required />
+                <input type="text" className="form-control" id="cpf" value={cpf} onChange={handleCpfChange} required />
               </div>
               <div className="form-group">
                 <label htmlFor="phone">Celular</label>
-                <input type="tel" className="form-control" id="phone" value={phone} onChange={e => setPhone(e.target.value)} required />
+                <input type="tel" className="form-control" id="phone" value={phone} onChange={handlePhoneChange} required />
               </div>
             </div>
 
