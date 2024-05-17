@@ -15,13 +15,11 @@ function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState(null);
-  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(`${apiBaseUrl}/login/auth`);
-      const response = await api.post(`${apiBaseUrl}/login/auth`, {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}/login/auth`, {
         email: email,
         password: password
       })
