@@ -1,24 +1,39 @@
 import React, { useState } from 'react';
+import api from '../services/api';
 import './problem.css';
 
 function Problem() {
-  const [description, setDescription] = useState('');
-  const [subject, setSubject] = useState('');
-  const [image, setImage] = useState(null);
+  const [pro_classification, setPro_classification] = useState('');
+  const [pro_name, setPro_name] = useState('');
+  const [pro_photo, setPro_photo] = useState(null);
   const [location, setLocation] = useState('');
   const [sent, setSent] = useState(false); // State to control whether the report was successfully sent
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     // Check if all fields are filled
-    if (subject && description && image && location) {
+    console.log(pro_name, pro_classification, pro_photo);
+    if (pro_name && pro_classification && pro_photo) {
+      try {
+        const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}problem/createProblem`, {
+          pro_name: pro_name,
+          pro_classification: pro_classification,
+          pro_photo: pro_photo,
+          //location: location
+        })
+          .then((response) => {
+            console.log(response);
+          })
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao inserir chamado!");
+      }
       // Here you can send the data to the API
-      console.log(`Subject: ${subject}, Description: ${description}, Image: ${image}, Location: ${location}`);
       setSent(true); // Set sent to true to display the success report screen
       // Clear fields after submission
-      setDescription('');
-      setSubject('');
-      setImage(null);
+      setPro_classification('');
+      setPro_name('');
+      setPro_photo(null);
       setLocation('');
     } else {
         alert("Por favor, preencha todos os campos para enviar o relato.");
@@ -28,7 +43,7 @@ function Problem() {
   // Function to handle image selection
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    setImage(file);
+    setPro_photo(file);
   };
 
   // Function to get the user's current location
@@ -55,8 +70,8 @@ function Problem() {
               id="subject"
               type="text"
               placeholder="Informe o assunto do problema"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
+              value={pro_name}
+              onChange={(e) => setPro_name(e.target.value)}
             />
           </div>
           <div className="input-container">
@@ -64,8 +79,8 @@ function Problem() {
             <textarea
               id="description"
               placeholder="Relate a situação do problema"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={pro_classification}
+              onChange={(e) => setPro_classification(e.target.value)}
             />
           </div>
           <div className="input-container">
@@ -83,8 +98,8 @@ function Problem() {
               id="location"
               type="text"
               placeholder="Digite a localização do problema"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              value={pro_photo}
+              onChange={(e) => setPro_photo(e.target.value)}
             />
             <button type="button" onClick={getLocation}>Usar a localização atual</button>
           </div>

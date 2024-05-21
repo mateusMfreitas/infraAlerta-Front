@@ -2,8 +2,15 @@ import React from 'react';
 import NavBar from '../navBar/navBar'; // Importe o NavBar
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faMagnifyingGlass, faTriangleExclamation, faSheetPlastic } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const Layout = ({ children }) => {
+    const navigate = useNavigate();
+
+    const redirecionarInserirChamado = () => {
+        navigate('/problem'); 
+    };
+
     return (
         <div className='container-fluid'>
             <NavBar />
@@ -20,7 +27,9 @@ const Layout = ({ children }) => {
                                 <FontAwesomeIcon icon={faMagnifyingGlass} className='mr-2 icon' />Busca Relato
                             </span>
                             <span className='button-menu'>
+                                <a onClick={redirecionarInserirChamado}>
                                 <FontAwesomeIcon icon={faTriangleExclamation} className='mr-2 icon' />Adicionar Relato
+                                </a>
                             </span>
                             <span className='button-menu'>
                                 <FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios

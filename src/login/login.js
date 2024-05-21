@@ -28,7 +28,7 @@ function Login() {
           if(!response.data.admin){
             navigate('/uDashboard');        
           }else{
-            navigate('/aDashboard');        
+            navigate('/report');        
           }
         })
     } catch (error) {
