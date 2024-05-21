@@ -25,6 +25,7 @@ function Login() {
       })
         .then((response) => {
           setUser(response.data);
+          sessionStorage.setItem('user', JSON.stringify(response.data));
           if(!response.data.admin){
             navigate('/uDashboard');        
           }else{

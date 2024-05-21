@@ -8,7 +8,7 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons/faTrian
 import NavBar from "../navBar/navBar";
 import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare';
-import Layout from '../layout/layout'; // Certifique-se de importar o Layout
+import Layout from '../layout/layout'; 
 
 
 function Report() {
