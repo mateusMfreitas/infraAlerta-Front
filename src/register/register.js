@@ -56,7 +56,6 @@ function Register() {
 
     const unformattedCpf = removeCpfFormatting(cpf);
     const unformattedPhone = removePhoneFormatting(phone);
-    console.log(unformattedCpf, unformattedPhone);
 
     try{
       const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}user/createUser`, {
