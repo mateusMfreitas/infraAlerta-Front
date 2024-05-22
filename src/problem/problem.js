@@ -7,8 +7,10 @@ function Problem() {
   const [pro_classification, setPro_classification] = useState('');
   const [pro_name, setPro_name] = useState('');
   const [pro_photo, setPro_photo] = useState(null);
-  const [location, setLocation] = useState('');
   const [sent, setSent] = useState(false); // State to control whether the report was successfully sent
+  const [pa_neighborhood, setPa_neighborhood] = useState('');
+  const [pa_address, setPa_address] = useState('');
+  const [pa_number, setPa_number] = useState('');
 
   const handleSubmit = async(event) => {
     event.preventDefault();
@@ -18,10 +20,19 @@ function Problem() {
       const user = userString ? JSON.parse(userString) : null;
       try {
         const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}problem/createProblem`, {
-          pro_name: pro_name,
-          pro_classification: pro_classification,
-          pro_photo: pro_photo,
-          pro_user: user.user_id
+          problem: {
+            pro_name: pro_name,
+            pro_classification: pro_classification,
+            pro_photo: pro_photo,
+            pro_user: user.user_id,
+          },
+          problemaddress: {
+            pa_address: pa_address,
+            pa_neighborhood: pa_neighborhood,
+            pa_number: pa_number,
+            pa_state: 'SP',
+            pa_city: 'Sorocaba',
+          }
         })
       } catch (error) {
         console.error(error);
@@ -33,7 +44,10 @@ function Problem() {
       setPro_classification('');
       setPro_name('');
       setPro_photo(null);
-      setLocation('');
+      setPa_neighborhood('');
+      setPa_address('');
+      setPa_number('');
+
     } else {
         alert("Por favor, preencha todos os campos para enviar o relato.");
     }
@@ -42,17 +56,16 @@ function Problem() {
   // Function to handle image selection
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    setPro_photo(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPro_photo(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   // Function to get the user's current location
   const getLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        setLocation(`Latitude: ${latitude}, Longitude: ${longitude}`);
-      });
     } else {
       alert("Geolocation is not supported by this browser.");
     }
@@ -93,16 +106,36 @@ function Problem() {
               />
             </div>
             <div className="input-container">
-              <label htmlFor="location">Localização:</label>
+              <label htmlFor="neighboorhood">Bairro:</label>
               <input
-                id="location"
+                id="neighboorhood"
                 type="text"
-                placeholder="Digite a localização do problema"
-                value={pro_photo}
-                onChange={(e) => setPro_photo(e.target.value)}
+                placeholder="Bairro"
+                value={pa_neighborhood}
+                onChange={(e) => setPa_neighborhood(e.target.value)}
               />
-              <button type="button" onClick={getLocation}>Usar a localização atual</button>
             </div>
+            <div className="input-container">
+              <label htmlFor="address">Rua:</label>
+              <input
+                id="address"
+                type="text"
+                placeholder="Endereço"
+                value={pa_address}
+                onChange={(e) => setPa_address(e.target.value)}
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="number">Número</label>
+              <input
+                id="number"
+                type="text"
+                placeholder="Número"
+                value={pa_number}
+                onChange={(e) => setPa_number(e.target.value)}
+              />
+            </div>
+              <button type="button" onClick={getLocation}>Usar a localização atual</button>
             <button type="submit">Enviar</button>
           </form>
         ) : ( // If sent, display the success report screen

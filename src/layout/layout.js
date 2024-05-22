@@ -11,6 +11,10 @@ const Layout = ({ children }) => {
         navigate('/problem'); 
     };
 
+    const redirecionarInicio = () => {
+        navigate('/report'); 
+    };
+
     return (
         <div className='container-fluid'>
             <NavBar />
@@ -20,10 +24,9 @@ const Layout = ({ children }) => {
                     <h4 className='m-3 title-menu'>Menu Principal</h4>
                     <div className='line text-center'>
                         <span className='button-menu'>
-                            <FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Painel de Controle
-                        </span>
-                        <span className='button-menu selected-menu'>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} className='mr-2 icon' />Busca Relato
+                            <a onClick={redirecionarInicio}>
+                                <FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Home
+                            </a>
                         </span>
                         <span className='button-menu'>
                             <a onClick={redirecionarInserirChamado}>

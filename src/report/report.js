@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, redirectDocument, useParams } from 'react-router-dom';
 import './report.css';
 import api from '../services/api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faMagnifyingGlass, faSheetPlastic, faSquareCheck, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons/faTriangleExclamation';
-import NavBar from "../navBar/navBar";
-import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare';
 import Layout from '../layout/layout'; 
 
 
