@@ -3,7 +3,8 @@ import Login from "./login/login";
 import Register from "./register/register";
 import Problem from "./problem/problem";
 import ForgotPassword from "./forgotPassword/forgotPassword";
-import Report, { ReportDetails } from "./report/report";
+import Report from "./report/report";
+import { ReportDetails } from "./reportDetails/reportDetails";
 import UDashboard from "./user/uDashboard"
 import ADashboard from "./admin/aDashboard"
 
