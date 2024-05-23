@@ -1,17 +1,45 @@
 .layout {
-    background-color: aqua;
+    background-color: red;
     position: fixed;
     z-index: 1;
-    width: 20%; /* Ajuste este valor conforme necessário */
-    height: 100%;
+    width: 25%; /* Ajuste este valor conforme necessário */
+    height: 52%;
   }
   .content {
-    background-color: red;
     position: absolute;
     z-index: 0;
-    left: 20%; /* Este valor deve ser igual à largura do layout */
+    left: 25%; /* Este valor deve ser igual à largura do layout */
     padding-left: 5%;
     padding-right: 5%;
-    width: 80%; /* Este valor deve ser 100% menos a largura do layout */
+    width: 75%; /* Este valor deve ser 100% menos a largura do layout */
     height: 100%;
+    padding-bottom: 10%;
   }
+  .chart-container {
+    width: 100%; /* ou 100% se você quiser que seja totalmente responsivo */
+    height: 100%;
+    padding-bottom: 10%;
+    padding-top: 10px;
+  }
+  .center-select {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .chart-button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .chart-button.selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
