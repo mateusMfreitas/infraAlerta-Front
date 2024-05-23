@@ -1,53 +1,113 @@
-import React  from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Container, Row, Col } from 'react-bootstrap';
-import Layout from '../layout/layout';
-import  './graphics.css' 
+import React, { useState } from "react";
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
+import Layout from "../layout/layout";
+import "./graphics.css";
 
-function Graphics() {
-  const userString = sessionStorage.getItem('user');
-  const user = userString ? JSON.parse(userString):null;
+function Graphics({chid}) {
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+  const [chartType, setChartType] = useState("status");
+
+  const handleClick = (value) => {
+    setChartType(value);
+  };
+
+  const handleChange = (event) => {
+    setChartType(event.target.value);
+  };
+
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+    labels: ["Pendente", "Atribuido", "Finalizado"],
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2],
+        label: "Chamados por Status",
+        data: [12, 19, 3],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)",
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
+          "rgba(255, 99, 132, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
         ],
-        borderWidth: 1,
+        borderWidth: 2,
       },
     ],
+  };
+
+  const data1 = {
+    labels: ["Campolim", "Centro", "Santa Rosália"],
+    datasets: [
+      {
+        label: "Chamados por Bairro",
+        data: [16, 63, 22],
+        backgroundColor: [
+          "rgba(177,224,198,0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(153, 102, 255, 0.5)",
+        ],
+        borderColor: [
+          "rgba(177,224,198,1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: "75%", // Ajusta a espessura da rosquinha
+    plugins: {
+      legend: {
+        position: "bottom", // Define a posição da legenda para a parte inferior
+        labels: {
+          padding: 30,
+        },
+      },
+    },
   };
 
   return (
     <>
       <div className="layout">
-        <Layout/>
+        <Layout />
       </div>
 
       <div className="content">
-        <Container>
-          <h1 className="text-center my-4">Relatório</h1>
-          <Row>
-            <Col md={6}>
-              <Doughnut data={data} />
-            </Col>
-          </Row>
-        </Container>
+        <h1 className="text-center my-4">Relatório</h1>
+
+        <div className="button-container">
+          <button
+            className={`chart-button ${
+              chartType === "status" ? "selected" : ""
+            }`}
+            onClick={() => handleClick("status")}
+          >
+            Status
+          </button>
+          <button
+            className={`chart-button ${
+              chartType === "district" ? "selected" : ""
+            }`}
+            onClick={() => handleClick("district")}
+          >
+            Bairro
+          </button>
+        </div>
+
+        <div className="chart-container">
+          {chartType === "status" ? (
+            <Doughnut data={data} options={options} />
+          ) : (
+            <Doughnut data={data1} options={options} />
+          )}
+        </div>
       </div>
     </>
   );
