@@ -1,0 +1,17 @@
+.layout {
+    background-color: aqua;
+    position: fixed;
+    z-index: 1;
+    width: 20%; /* Ajuste este valor conforme necessário */
+    height: 100%;
+  }
+  .content {
+    background-color: red;
+    position: absolute;
+    z-index: 0;
+    left: 20%; /* Este valor deve ser igual à largura do layout */
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 80%; /* Este valor deve ser 100% menos a largura do layout */
+    height: 100%;
+  }
