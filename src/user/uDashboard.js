@@ -1,27 +1,58 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-import logo from '../assets/Logo.png';
+import React, { useEffect, useState } from 'react';
+import './uDashboard.css';
 import api from '../services/api';
+import Layout from '../layout/layout'; 
+
 
 function UDashboard() {
-    const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [user, setUser] = useState(null);
+  const [report, setReport] = useState([]);
 
-    return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-        <p style={{color: 'white'}}>oiiiiiiiii</p>
-        <button onClick={() => navigate('/problem')}>Inserir Problema</button>
-            
+  function handleRowClick(id) {
+    window.location=`/report/${id}`;
+  }
+  useEffect(() => {
+    async function getChamados(){
+      try {
+        const userString = sessionStorage.getItem('user');
+        const user = userString ? JSON.parse(userString) : null;
+        const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/getProblemsUser/${user.user_id}`)
+          .then((response) => {
+            setReport(response.data);
+          })
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao buscar chamados!");
+      }
+    }
+    getChamados();
+  }, []);
+
+  return (
+
+      <Layout>
+        <div className="col-md-9 text-center" style={{ justifyContent: 'right', marginLeft: '500px'}}>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Classificação</th>
+                <th scope="col">Assunto</th>
+              </tr>
+            </thead>
+            <tbody>
+              {report.map((item) => (
+                <tr key={item.pro_id} onClick={() => handleRowClick(item.pro_id)} style={{ cursor: 'pointer' }}>
+                  <th scope="row">#{item.pro_id}</th>
+                  <td>{item.pro_classification}</td>
+                  <td>{item.pro_name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-    );
+      </Layout>
+  );
 }
 
 export default UDashboard;
