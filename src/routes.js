@@ -8,13 +8,14 @@ import { ReportDetails } from "./reportDetails/reportDetails";
 import UDashboard from "./user/uDashboard"
 import ADashboard from "./admin/aDashboard"
 import Graphics from "./graphics/graphics";
+import LandingPage from "./landingPage/landingPage";
 
 function AppRoutes() {
     return(
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<Login/>} />
-                <Route path="/" element={<Login/>} />
+                <Route path="/" element={<LandingPage/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route path="/problem" element={<Problem/>} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />

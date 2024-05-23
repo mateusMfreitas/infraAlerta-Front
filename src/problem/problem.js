@@ -25,6 +25,7 @@ function Problem() {
             pro_classification: pro_classification,
             pro_photo: pro_photo,
             pro_user: user.user_id,
+            pro_status: 'PENDENTE'
           },
           problemaddress: {
             pa_address: pa_address,
