@@ -10,11 +10,6 @@ import api from '../services/api';
 function ADashboard() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [user, setUser] = useState(null);
-
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
         <p style={{color: 'white'}}>Você é admin</p>

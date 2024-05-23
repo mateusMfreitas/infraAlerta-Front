@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, redirectDocument, useParams } from 'react-router-dom';
+import { Link, useNavigate, redirectDocument, useParams } from 'react-router-dom';
 import './reportDetails.css';
 import api from '../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,11 +11,16 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare';
 import Layout from '../layout/layout'; 
 
 export function ReportDetails() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [report, setReport] = useState([]);
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
       async function getChamado(){
+      const userString = sessionStorage.getItem('user');
+      const user = userString ? JSON.parse(userString) : null;
+      setUser(user);
       try {
           const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/getProblem/${id}`)
           .then((response) => {
@@ -28,15 +33,45 @@ export function ReportDetails() {
       }
       getChamado();
   }, []);
-    function alterarResponsavel(){
+    async function excluir(id){
+      try {
+        const response = await api.delete(`${process.env.REACT_APP_API_BASE_URL}problem/deleteProblem/${id}`)
+          .then((response) => {
+            navigate(`/report`)
+          })
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao excluir chamado");
+      }
+    }
 
+    async function alterarResponsavel(id, userId){
+      try {
+        const response = await api.put(`${process.env.REACT_APP_API_BASE_URL}problem/changeOwner/${id}/${userId}`)
+          .then((response) => {
+            window.location.reload();
+          })
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao alterar responsável");
+      }
     }
-    function excluir(){
 
+    async function finalizar(id){
+      try {
+        const response = await api.put(`${process.env.REACT_APP_API_BASE_URL}problem/closeProblem/${id}`)
+          .then((response) => {
+            setReport(response.data);
+            window.location.reload();
+
+          })
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao Finalizar chamado");
+      }
     }
-    function finalizar(){
-    }
-    function adicionarComentario(){
+    async function adicionarComentario(id, userId){
+
     }
 
   useEffect(() => {
@@ -44,28 +79,7 @@ export function ReportDetails() {
   }, [report]);
   
     return (
-      <div className='container-fluid'>
-        <NavBar />
-        <hr />
-        <div className="container-fluid">
-          <div className="row content">
-            <div className="col-md-3">
-              <div className='menuLateral' id='menuLateral'>
-                <h4 className='m-4 title-menu'>Menu Principal</h4>
-                <div className='line text-center'>
-                  <span className='button-menu'><FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Painel de Controle</span>
-                  <span className='button-menu selected-menu'><FontAwesomeIcon icon={faMagnifyingGlass} className='mr-2 icon' />Busca Relato</span>
-                  <span className='button-menu'><FontAwesomeIcon icon={faTriangleExclamation} className='mr-2 icon' />Adicionar Relato</span>
-                  <span className='button-menu'><FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios</span>
-                </div>
-  
-                <div className='line'>
-                  <h1>Preferencias</h1>
-                  <h1>Configurações</h1>
-                </div>
-              </div>
-            </div>
-  
+      <Layout>
             <div className="col-md-9 text-center" id="content-details">
               <hr />
               <h1>#{report && report.problem ? report.problem['0'].pro_id : '...'} - {report && report.problem ? report.problem['0'].pro_name : '...'}</h1>
@@ -99,25 +113,26 @@ export function ReportDetails() {
                   <h4>Ações:</h4>
                   <div className='row mt-2'>
                     <div className='col-3 text-center'>
-                      <a onClick={adicionarComentario} className='text-dark'>
+                      <a onClick={()=>{adicionarComentario(report.problem['0'].pro_id)}} className='text-dark'>
                         <FontAwesomeIcon icon={faMessage} /><br/>
                         Adicionar comentário<br/>
                       </a>
                     </div>
                     <div className='col-3 text-center'>
-                      <a onClick={alterarResponsavel} role="button" className="text-dark"   data-toggle="modal" data-target="#modalEdit">
+                      <a onClick={()=>{alterarResponsavel(report.problem['0'].pro_id, user['user_id'])}} role="button" className="text-dark"   data-toggle="modal" data-target="#modalEdit">
                         <FontAwesomeIcon icon={faPenToSquare} /><br/>
                         Alterar Responsável<br/>
                       </a>
+                      <span><small>Responsável atual: {report && report.problem ? report.problem['0'].pro_admin : '...'}</small></span>
                     </div>
                     <div className='col-3 text-center'>
-                      <a onClick={excluir} className='text-dark'>
+                      <a onClick={()=>{excluir(report.problem['0'].pro_id)}} className='text-dark'>
                         <FontAwesomeIcon icon={faTrashCan} /><br/>
                         Excluir<br/>
                       </a>
                     </div>
                     <div className='col-3 text-center'>
-                      <a onClick={finalizar} className='text-dark'>
+                      <a onClick={()=>{finalizar(report.problem['0'].pro_id)}} className='text-dark'>
                         <FontAwesomeIcon icon={faSquareCheck} /><br/>
                         Finalizar<br/>
                       </a>
@@ -125,10 +140,7 @@ export function ReportDetails() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        
+               
         <div className="modal fade" id="modalEdit" tabIndex="-1" aria-labelledby="editModal" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
@@ -148,7 +160,9 @@ export function ReportDetails() {
             </div>
           </div>
         </div>
+
       </div>
+      </Layout>   
     );
     
   }
