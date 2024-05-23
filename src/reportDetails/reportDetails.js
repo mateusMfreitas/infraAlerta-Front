@@ -28,6 +28,16 @@ export function ReportDetails() {
       }
       getChamado();
   }, []);
+    function alterarResponsavel(){
+
+    }
+    function excluir(){
+
+    }
+    function finalizar(){
+    }
+    function adicionarComentario(){
+    }
 
   useEffect(() => {
     console.log(report);
@@ -89,25 +99,25 @@ export function ReportDetails() {
                   <h4>Ações:</h4>
                   <div className='row mt-2'>
                     <div className='col-3 text-center'>
-                      <a href='#' className='text-dark'>
+                      <a onClick={adicionarComentario} className='text-dark'>
                         <FontAwesomeIcon icon={faMessage} /><br/>
                         Adicionar comentário<br/>
                       </a>
                     </div>
                     <div className='col-3 text-center'>
-                      <a href="#" role="button" className="text-dark"   data-toggle="modal" data-target="#modalEdit">
+                      <a onClick={alterarResponsavel} role="button" className="text-dark"   data-toggle="modal" data-target="#modalEdit">
                         <FontAwesomeIcon icon={faPenToSquare} /><br/>
                         Alterar Responsável<br/>
                       </a>
                     </div>
                     <div className='col-3 text-center'>
-                      <a href='#' className='text-dark'>
+                      <a onClick={excluir} className='text-dark'>
                         <FontAwesomeIcon icon={faTrashCan} /><br/>
                         Excluir<br/>
                       </a>
                     </div>
                     <div className='col-3 text-center'>
-                      <a href='#' className='text-dark'>
+                      <a onClick={finalizar} className='text-dark'>
                         <FontAwesomeIcon icon={faSquareCheck} /><br/>
                         Finalizar<br/>
                       </a>
