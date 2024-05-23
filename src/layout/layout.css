@@ -1,20 +1,16 @@
-.button-menu button {
-    display: inline-block;
-    padding: 10px 20px;
-    text-decoration: none;
-    background-color: #f8f9fa;
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button-menu button:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .button-menu button.active {
-    background-color: #6a6fff;
-    color: white;
-  }
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.layout-button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.layout-button.selected {
+  background-color: #007bff;
+  color: white;
+}
