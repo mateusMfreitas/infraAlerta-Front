@@ -1,0 +1,16 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.layout-button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.layout-button.selected {
+  background-color: #007bff;
+  color: white;
+}
