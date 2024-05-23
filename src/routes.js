@@ -9,6 +9,7 @@ import UDashboard from "./user/uDashboard"
 import ADashboard from "./admin/aDashboard"
 import Graphics from "./graphics/graphics";
 import LandingPage from "./landingPage/landingPage";
+import { withAuth } from "./auth/auth";
 
 function AppRoutes() {
     return(
@@ -17,13 +18,13 @@ function AppRoutes() {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/" element={<LandingPage/>} />
                 <Route path="/register" element={<Register/>} />
-                <Route path="/problem" element={<Problem/>} />
+                <Route path="/problem" element={withAuth(<Problem/>)} />
                 <Route path="/forgot-password" element={<ForgotPassword/>} />
-                <Route path="/report" element={<Report/>} />
-                <Route path="/report/:id" element={<ReportDetails/>} />
-                <Route path="/uDashboard" element={<UDashboard/>}/>
-                <Route path="/aDashboard" element={<ADashboard/>}/>
-                <Route path="/graphics" element={<Graphics/>}/>
+                <Route path="/report" element={withAuth(<Report/>)} />
+                <Route path="/report/:id" element={withAuth(<ReportDetails/>)} />
+                <Route path="/uDashboard" element={withAuth(<UDashboard/>)} />
+                <Route path="/aDashboard" element={withAuth(<ADashboard/>)} />
+                <Route path="/graphics" element={withAuth(<Graphics/>)}/>
             </Routes>
         </BrowserRouter>
     );
