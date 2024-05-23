@@ -7,6 +7,7 @@ import Report from "./report/report";
 import { ReportDetails } from "./reportDetails/reportDetails";
 import UDashboard from "./user/uDashboard"
 import ADashboard from "./admin/aDashboard"
+import Graphics from "./graphics/graphics";
 
 function AppRoutes() {
     return(
@@ -21,7 +22,7 @@ function AppRoutes() {
                 <Route path="/report/:id" element={<ReportDetails/>} />
                 <Route path="/uDashboard" element={<UDashboard/>}/>
                 <Route path="/aDashboard" element={<ADashboard/>}/>
-
+                <Route path="/graphics" element={<Graphics/>}/>
             </Routes>
         </BrowserRouter>
     );
