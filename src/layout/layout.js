@@ -1,14 +1,14 @@
-import React, {useState,useEffect} from 'react';
-import NavBar from '../navBar/navBar'; // Importe o NavBar
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faMagnifyingGlass, faTriangleExclamation, faSheetPlastic } from '@fortawesome/free-solid-svg-icons';
+import React, {useState} from 'react';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './layout.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faTriangleExclamation, faSheetPlastic } from '@fortawesome/free-solid-svg-icons';
+import logo from '../assets/Logo.png';
 
 const Layout = ({ children }) => {
-    const [selectedMenu, setSelectedMenu] = useState();
     const location = useLocation();
     const navigate = useNavigate();
+    const [imageUser, setImageUser] = useState('/images/image.png');
 
     const redirecionarInserirChamado = () => {
         navigate('/problem'); 
@@ -17,42 +17,35 @@ const Layout = ({ children }) => {
     const redirecionarInicio = () => {
         navigate('/report'); 
     };
+
     const redirecionarRelatorio = () => {
         navigate('/graphics'); 
     };
 
     return (
-        <div className='container-fluid'>
-            <NavBar />
-            <hr />
-            <div className='row content' style={{ display: 'flex' }}>
-                <div className='menuLateral col-md-3' id='menuLateral'>
-                    <h4 className='m-3 title-menu'>Menu Principal</h4>
-                    <div className='line text-center'>
-            <span className='button-menu'>
-                <button onClick={redirecionarInicio} className={`layout-button ${location.pathname === '/report' ? 'selected' : ''}`}>
-                    <FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Home
-                </button>
-            </span>
-            <span className='button-menu'>
-                <button onClick={redirecionarInserirChamado} className={`layout-button ${location.pathname === '/problem' ? 'selected' : ''}`}>
-                <FontAwesomeIcon icon={faTriangleExclamation} className='mr-2 icon' />Adicionar Relato
-                </button>
-            </span>
-            <span className='button-menu'>
-                <button onClick={redirecionarRelatorio} className={`layout-button ${location.pathname === '/graphics' ? 'selected' : ''}`}>
-                <FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios
-                </button>
-            </span>
-        </div>
-                    <div className='line text-center'>
-                        <h1>Preferências</h1>
-                        <h1>Configurações</h1>
-                    </div>
-                </div>
-                <div>
-                    {children}  {/* Conteúdo específico da página */}
-                </div>
+        <div>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="#home"><a className="navbar-brand" href="/report">
+              <img src={logo} alt="logo infraAlerta" width={80} height={80} />
+            </a></Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/report'}>
+                            <FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Home
+                        </Nav.Link>
+                        <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
+                            <FontAwesomeIcon icon={faTriangleExclamation} className='mr-2 icon' />Adicionar Relato
+                        </Nav.Link>
+                        <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/graphics'}>
+                            <FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios
+                        </Nav.Link>
+                    </Nav>
+                    {/* <img src={imageUser} alt="foto do usuário" width={80} height={80}/> */}
+                </Navbar.Collapse>
+            </Navbar>
+            <div>
+                {children}  {/* Conteúdo específico da página */}
             </div>
         </div>
     );
