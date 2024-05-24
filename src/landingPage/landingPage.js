@@ -301,7 +301,7 @@ function LandingPage() {
                         <div className="row">
                             <div className="col-lg-5">
                                 <div className="text-container">
-                                    <div className="section-title">Step 2</div>
+                                    <div className="section-title">Passo 2</div>
                                     <h2>Relate sua queixa</h2>
                                     <p>
                                         Adicione as informações sobre sua queixa de forma rápida e fácil, enviando seu relato diretamente para a prefeitura.
