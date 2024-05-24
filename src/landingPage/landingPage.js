@@ -126,7 +126,7 @@ function LandingPage() {
                                      a infraestrutura urbana. Toda a nossa experiência e paixão estão no InfraAlerta, e você é convidado a usá-lo para
                                       contribuir com a sua comunidade.
                                     </p>
-                                    <a className="btn-solid-reg" href="sign-up.html">
+                                    <a className="btn-solid-reg" href="/register">
                                         Cadastre-se
                                     </a>
                                 </div>
