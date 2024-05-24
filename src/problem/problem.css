@@ -10,7 +10,11 @@
     padding: 20px;
     border-radius: 10px;
     background-color: #f8f9fa; 
-    margin-left: 600px;
+  }
+  @media (max-width: 992px) {
+    .Problem-form {
+      width: 90%;
+    }
   }
   
   .Problem-form h1 {
