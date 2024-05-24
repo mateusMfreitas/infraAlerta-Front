@@ -31,7 +31,7 @@ function UDashboard() {
   return (
 
       <Layout>
-        <div className="col-md-9 text-center" style={{ justifyContent: 'right', marginLeft: '500px'}}>
+        <div className="col-md-9 text-center" style={{ justifyContent: 'center', width: '100%'}}>
           <table className="table table-striped">
             <thead>
               <tr>
