@@ -60,23 +60,28 @@ function LandingPage() {
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link page-scroll" href="#intro">
-                                        Intro
+                                        Introdução
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link page-scroll" href="#features">
-                                        Features
+                                        Funcionalidades
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link page-scroll" href="#details">
-                                        Details
+                                        Detalhes
                                     </a>
                                 </li>
                             </ul>
                             <span className="nav-item">
                                 <a className="btn-solid-sm page-scroll" href="/register">
                                     Cadastre-se
+                                </a>
+                            </span>
+                            <span className="nav-item">
+                                <a class="btn-outline-sm page-scroll" href="/login">
+                                    Entre
                                 </a>
                             </span>
                         </div>
@@ -104,46 +109,6 @@ function LandingPage() {
                     </div> 
                 </header> 
 
-                {/* Customers */}
-                <div className="slider-1">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <h4>
-                                    Brands and shops that use <span>Kora</span> to grow their business
-                                </h4>
-                                <hr className="section-divider" />
-
-                                {/* Image Slider */}
-                                <div className="slider-container">
-                                    <div className="swiper-container image-slider">
-                                        <div className="swiper-wrapper">
-                                            <div className="swiper-slide">
-                                                <img className="img-fluid" src="images/customer-logo-1.png" alt="alternative" />
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <img className="img-fluid" src="images/customer-logo-2.png" alt="alternative" />
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <img className="img-fluid" src="images/customer-logo-3.png" alt="alternative" />
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <img className="img-fluid" src="images/customer-logo-4.png" alt="alternative" />
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <img className="img-fluid" src="images/customer-logo-5.png" alt="alternative" />
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <img className="img-fluid" src="images/customer-logo-6.png" alt="alternative" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* end of image slider */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 {/* end of customers */}
 
                 {/* Introduction */}
@@ -151,18 +116,18 @@ function LandingPage() {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-7">
-                                <img className="img-fluid" src="images/introduction.jpg" alt="alternative" />
+                                <img style={{width: "700px", borderRadius: '5%'}} className="img-fluid" src="images/fotoReal.png" alt="alternative" />
                             </div>
                             <div className="col-lg-5">
                                 <div className="text-container">
-                                    <h2>Kora is here to help you grow your online shop</h2>
+                                    <h2>O InfraAlerta ajudará em cada passo desta jornada</h2>
                                     <p>
-                                        We believe in sustainable and trustful ecommerce which offers opportunities for both
-                                        shop owners and customers. Our entire experience and passion can be found in Kora and
-                                        you are invited to use it for your business
+                                    Acreditamos em uma cidade mais conectada e eficiente, onde cidadãos e prefeitura trabalham juntos para melhorar
+                                     a infraestrutura urbana. Toda a nossa experiência e paixão estão no InfraAlerta, e você é convidado a usá-lo para
+                                      contribuir com a sua comunidade.
                                     </p>
                                     <a className="btn-solid-reg" href="sign-up.html">
-                                        Sign up
+                                        Cadastre-se
                                     </a>
                                 </div>
                             </div>
@@ -176,16 +141,15 @@ function LandingPage() {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <h2 className="h2-heading">Check out all the features</h2>
+                                <h2 className="h2-heading">Confira todas as funcionalidades</h2>
                                 <p className="p-heading">
-                                    The features built into Kora were designed to help online shop owners present their
-                                    merchandise and find more customers
+                                    As funcionalidades integradas ao InfraAlerta foram projetadas para ajudar os cidadãos a relatar problemas
+                                    de infraestrutura de maneira eficiente e ajudar a prefeitura a resolvê-los rapidamente.
                                 </p>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-lg-12">
-                                {/* Card */}
+                        <div className="row justify-content-center">
+                            <div className="col-lg-4">
                                 <div className="card">
                                     <div className="card-icon-wrapper">
                                         <div className="card-icon">
@@ -193,19 +157,15 @@ function LandingPage() {
                                         </div>
                                     </div>
                                     <div className="card-body">
-                                        <h4 className="card-title">Product Marketing On Social Platforms</h4>
+                                        <h4 className="card-title">Suporte sempre disponível e alerta</h4>
                                         <p>
-                                            Besides regular product display options Kora has multiple functions for social
-                                            networks integration
+                                        Suporte sempre disponível, permitindo que entrem em contato facilmente 
+                                        com a equipe.
                                         </p>
-                                        <a className="read-more no-line" href="article.html">
-                                            Learn more <span className="fas fa-long-arrow-alt-right"></span>
-                                        </a>
                                     </div>
                                 </div>
-                                {/* end of card */}
-
-                                {/* Card */}
+                            </div>
+                            <div className="col-lg-4">
                                 <div className="card">
                                     <div className="card-icon-wrapper">
                                         <div className="card-icon">
@@ -213,19 +173,14 @@ function LandingPage() {
                                         </div>
                                     </div>
                                     <div className="card-body">
-                                        <h4 className="card-title">Branding And Strategy Basic Guidelines</h4>
+                                        <h4 className="card-title">Controle simples e rápido de relatos</h4>
                                         <p>
-                                            To build a solid foundation for your online shop you need a strong brand and a
-                                            bulletproof strategy
+                                            Fácil adaptação ao sistema, tornando o processos mais rápidos e eficiente, para o cidadão e para a prefeitura.
                                         </p>
-                                        <a className="read-more no-line" href="article.html">
-                                            Learn more <span className="fas fa-long-arrow-alt-right"></span>
-                                        </a>
                                     </div>
                                 </div>
-                                {/* end of card */}
-
-                                {/* Card */}
+                            </div>
+                            <div className="col-lg-4">
                                 <div className="card">
                                     <div className="card-icon-wrapper">
                                         <div className="card-icon">
@@ -233,22 +188,18 @@ function LandingPage() {
                                         </div>
                                     </div>
                                     <div className="card-body">
-                                        <h4 className="card-title">Design & Development Advanced Services</h4>
+                                        <h4 className="card-title">Fácil interação com o responsável do relato</h4>
                                         <p>
-                                            Our team of competent designers and developers are able to create great designs and
-                                            structured code
+                                            É possível conversar diretamente com o responsável pelo relato, para tirar dúvidas e
+                                            buscar uma solução.
                                         </p>
-                                        <a className="read-more no-line" href="article.html">
-                                            Learn more <span className="fas fa-long-arrow-alt-right"></span>
-                                        </a>
                                     </div>
                                 </div>
-                                {/* end of card */}
                             </div>
                         </div>
                     </div>
                 </div>
-                {/* end of features */}
+
 
                 {/* Details 1 */}
                 <div id="details" className="basic-2">
@@ -256,11 +207,11 @@ function LandingPage() {
                         <div className="row">
                             <div className="col-lg-9">
                                 <div className="intro">
-                                    <h2>Start a successful ecommerce business in no more than 3 easy steps with Kora</h2>
+                                    <h2>Comece a reportar seus relatos em apenas 2 passos com o InfraAlerta</h2>
                                     <p>
-                                        To build a solid foundation for your online shop you need a strong brand and a
-                                        bulletproof strategy. You can rely on our experience to create a beautiful and efficient
-                                        online shop that offers benefits for both the shop brand and loyal customers
+                                    Para transformar a infraestrutura da sua cidade, você precisa de uma ferramenta intuitiva e eficiente. 
+                                    Com o InfraAlerta, você pode contar com nossa experiência para relatar problemas de forma rápida e fácil, 
+                                    beneficiando tanto a comunidade quanto a administração pública.
                                     </p>
                                 </div>
                             </div>
@@ -268,19 +219,18 @@ function LandingPage() {
                         <div className="row">
                             <div className="col-lg-7">
                                 <div className="image-container">
-                                    <img className="img-fluid" src="images/details-1.png" alt="alternative" />
+                                    <img style={{borderRadius: '5%'}} className="img-fluid" src="images/telacadastro.png" alt="alternative" />
                                 </div>
                             </div>
                             <div className="col-lg-5">
                                 <div className="text-container">
-                                    <div className="section-title">Step 1</div>
-                                    <h2>Figure out what to sell</h2>
+                                    <div className="section-title">Passo 1</div>
+                                    <h2>Crie sua conta</h2>
                                     <p>
-                                        Delivering powerful brands for popular shops while creating beautiful concepts and
-                                        evocative logos. Use the opportunity to prepare complete style guides
+                                        Crie sua conta com os devidos dados e informações para começar a reportar problemas em sua cidade.
                                     </p>
-                                    <a className="btn-solid-reg popup-with-move-anim" href="#details-lightbox">
-                                        Lightbox
+                                    <a className="btn-solid-reg popup-with-move-anim" href="/register">
+                                        Crie sua conta
                                     </a>
                                 </div>
                             </div>
@@ -352,30 +302,18 @@ function LandingPage() {
                             <div className="col-lg-5">
                                 <div className="text-container">
                                     <div className="section-title">Step 2</div>
-                                    <h2>Analyze the marketplace</h2>
+                                    <h2>Relate sua queixa</h2>
                                     <p>
-                                        Our team of competent designers and developers are able to create beautiful designs and
-                                        structured code that will serve your ecommerce project on the long term
+                                        Adicione as informações sobre sua queixa de forma rápida e fácil, enviando seu relato diretamente para a prefeitura.
                                     </p>
-                                    <ul className="list-unstyled li-space-lg">
-                                        <li className="media">
-                                            <i className="fas fa-square"></i>
-                                            <div className="media-body">Delivering powerful brands for popular shops</div>
-                                        </li>
-                                        <li className="media">
-                                            <i className="fas fa-square"></i>
-                                            <div className="media-body">Creating beautiful concepts and evocative logos</div>
-                                        </li>
-                                        <li className="media">
-                                            <i className="fas fa-square"></i>
-                                            <div className="media-body">Preparing complete branding guides and styles</div>
-                                        </li>
-                                    </ul>
+                                    <a className="btn-outline-reg popup-with-move-anim" href="/register">
+                                        Comece agora
+                                    </a>
                                 </div>
                             </div>
                             <div className="col-lg-7">
                                 <div className="image-container">
-                                    <img className="img-fluid" src="images/details-2.png" alt="alternative" />
+                                    <img style={{width: "500px", borderRadius: '5%'}} className="img-fluid" src="images/detalhesatt.png" alt="alternative" />
                                 </div>
                             </div>
                         </div>
@@ -383,42 +321,14 @@ function LandingPage() {
                 </div>
                 {/* end of details 2 */}
 
-                {/* Details 3 */}
-                <div className="basic-4">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-7">
-                                <div className="image-container">
-                                    <img className="img-fluid" src="images/details-3.png" alt="alternative" />
-                                </div>
-                            </div>
-                            <div className="col-lg-5">
-                                <div className="text-container">
-                                    <div className="section-title">Step 3</div>
-                                    <h2>Create your shop account</h2>
-                                    <p>
-                                        We can deliver a comprehensive marketing plan and then execute it down to the smallest
-                                        details. To start using Kora just sign up and submit your details
-                                    </p>
-                                    <a className="btn-solid-reg" href="sign-up.html">
-                                        Sign up now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* end of details 3 */}
-
                 {/* Testimonials */}
                 <div className="slider-2">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <h2 className="h2-heading">Few words from shop owners</h2>
+                                <h2 className="h2-heading">Missão da Equipe InfraAlerta</h2>
                                 <p className="p-heading">
-                                    You can read below a few testimonials from satisfied shop owners. Of course there are also
-                                    some unhappy ones but they're not here
+                                    Nossa equipe é apaixonada por ajudar a melhorar a infraestrutura urbana e a vida dos cidadãos. 
                                 </p>
                             </div>
                         </div>
@@ -432,156 +342,25 @@ function LandingPage() {
                                                 <div className="card">
                                                     <div className="card-body">
                                                         <p className="testimonial-text">
-                                                            I am happy to have chosen Blink for our shop implementation. Their
-                                                            specialized experience helped the project and made it available 2
-                                                            weeks prior the launch date for extensive testing
+                                                        Nossa missão é conectar cidadãos e prefeituras através de uma comunicação eficiente, 
+                                                        promovendo a melhoria contínua da infraestrutura urbana. Valorizamos a transparência, 
+                                                        a colaboração e a inovação, com o objetivo de criar cidades mais seguras e bem cuidadas para todos.
                                                         </p>
                                                         <div className="details">
                                                             <img
                                                                 className="testimonial-image"
-                                                                src="images/testimonial-1.jpg"
+                                                                src="images/missao.jpeg"
                                                                 alt="alternative"
                                                             />
                                                             <div className="text">
-                                                                <div className="testimonial-author">Samantha Bloom</div>
-                                                                <div className="occupation">Team Leader - Syncnow</div>
+                                                                <div className="testimonial-author">Equipe InfraAlerta</div>
+                                                                <div className="occupation">Unidos por um futuro melhor!</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* end of swiper-slide */}
-
-                                            {/* Slide */}
-                                            <div className="swiper-slide">
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <p className="testimonial-text">
-                                                            Totally recommended. I am happy to have chosen Blink for our shop
-                                                            implementation. Their great specialized experience helped the project
-                                                            and made it available 2 weeks prior the launch
-                                                        </p>
-                                                        <div className="details">
-                                                            <img
-                                                                className="testimonial-image"
-                                                                src="images/testimonial-2.jpg"
-                                                                alt="alternative"
-                                                            />
-                                                            <div className="text">
-                                                                <div className="testimonial-author">Nicolas Richter</div>
-                                                                <div className="occupation">Manager - Firstup</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* end of swiper-slide */}
-
-                                            {/* Slide */}
-                                            <div className="swiper-slide">
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <p className="testimonial-text">
-                                                            I am happy to have chosen Blink for our shop implementation. Their
-                                                            specialized experience helped the project and made it available 2
-                                                            weeks prior the launch date for extensive testing
-                                                        </p>
-                                                        <div className="details">
-                                                            <img
-                                                                className="testimonial-image"
-                                                                src="images/testimonial-3.jpg"
-                                                                alt="alternative"
-                                                            />
-                                                            <div className="text">
-                                                                <div className="testimonial-author">Mary Longhorn</div>
-                                                                <div className="occupation">Designer - Firstdev</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* end of swiper-slide */}
-
-                                            {/* Slide */}
-                                            <div className="swiper-slide">
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <p className="testimonial-text">
-                                                            Totally recommended. I am happy to have chosen Blink for our shop
-                                                            implementation. Their great specialized experience helped the project
-                                                            and made it available 2 weeks prior the launch
-                                                        </p>
-                                                        <div className="details">
-                                                            <img
-                                                                className="testimonial-image"
-                                                                src="images/testimonial-4.jpg"
-                                                                alt="alternative"
-                                                            />
-                                                            <div className="text">
-                                                                <div className="testimonial-author">Mike Page</div>
-                                                                <div className="occupation">Developer - Chainlink</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* end of swiper-slide */}
-
-                                            {/* Slide */}
-                                            <div className="swiper-slide">
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <p className="testimonial-text">
-                                                            I am happy to have chosen Blink for our shop implementation. Their
-                                                            specialized experience helped the project and made it available 2
-                                                            weeks prior the launch date for extensive testing
-                                                        </p>
-                                                        <div className="details">
-                                                            <img
-                                                                className="testimonial-image"
-                                                                src="images/testimonial-5.jpg"
-                                                                alt="alternative"
-                                                            />
-                                                            <div className="text">
-                                                                <div className="testimonial-author">Susanne Blake</div>
-                                                                <div className="occupation">Operations - Launchday</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* end of swiper-slide */}
-
-                                            {/* Slide */}
-                                            <div className="swiper-slide">
-                                                <div className="card">
-                                                    <div className="card-body">
-                                                        <p className="testimonial-text">
-                                                            Totally recommended. I am happy to have chosen Blink for our shop
-                                                            implementation. Their great specialized experience helped the project
-                                                            and made it available 2 weeks prior the launch
-                                                        </p>
-                                                        <div className="details">
-                                                            <img
-                                                                className="testimonial-image"
-                                                                src="images/testimonial-6.jpg"
-                                                                alt="alternative"
-                                                            />
-                                                            <div className="text">
-                                                                <div className="testimonial-author">Vanya Dropper</div>
-                                                                <div className="occupation">Marketer - Flinco</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* end of swiper-slide */}
                                         </div>
-
-                                        {/* Add Arrows */}
-                                        <div className="swiper-button-next"></div>
-                                        <div className="swiper-button-prev"></div>
-                                        {/* end of add arrows */}
                                     </div>
                                 </div>
                             </div>
@@ -595,10 +374,10 @@ function LandingPage() {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <h2 className="h2-heading">Subscribe And Follow Us</h2>
+                                <h2 className="h2-heading">Inscreva-se para ficar por dentro!</h2>
                                 <p className="p-heading">
-                                    Be part of the story and follow us on Twitter via <a href="#your-link">@name</a> and
-                                    subscribe to the newsletter for news and updates about our workshops
+                                    Inscreva-se para receber atualizações e novidades sobre o InfraAlerta.
+                                    Junte-se a nós e faça parte da comunidade!
                                 </p>
                             </div>
                         </div>
@@ -606,20 +385,16 @@ function LandingPage() {
                             <div className="col-lg-12">
                                 {/* Newsletter Form */}
                                 <form>
-                                    <div className="form-group mail">
-                                        <input type="email" className="form-control-input" id="nemail" required />
-                                        <label className="label-control" htmlFor="nemail">
-                                            Email address
-                                        </label>
-                                        <div className="help-block with-errors"></div>
+                                    <div class="form-group mail">
+                                        <input type="email" class="form-control-input" id="nemail" required/>
+                                        <label class="label-control" for="nemail">Endereço de email</label>
+                                        <div class="help-block with-errors"></div>
                                     </div>
-                                    <div className="form-group">
-                                        <button type="submit" className="form-control-submit-button">
-                                            Subscribe
-                                        </button>
+                                    <div class="form-group">
+                                        <button type="submit" class="form-control-submit-button">Inscreva-se</button>
                                     </div>
-                                    <div className="form-message">
-                                        <div id="nmsgSubmit" className="h3 text-center hidden"></div>
+                                    <div class="form-message">
+                                        <div id="nmsgSubmit" class="h3 text-center hidden"></div>
                                     </div>
                                 </form>
                                 {/* end of newsletter form */}
@@ -635,10 +410,11 @@ function LandingPage() {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="footer-col first">
-                                    <h6>About Kora</h6>
+                                    <h6>Sobre o InfraAlerta</h6>
                                     <p className="p-small">
-                                        Kora is a SaaS app website Bootstrap HTML template packed with features like logo
-                                        slider, details lightbox, testimonial slider dropdown
+                                    O InfraAlerta é um sistema de relato de problemas na infraestrutura urbana, repleto de funcionalidades
+                                     como suporte ao cidadão, geração automática de relatórios e mapas interativos 
+                                     para visualização dos problemas.
                                     </p>
                                 </div>
                                 <div className="footer-col second">
@@ -657,13 +433,19 @@ function LandingPage() {
                                                 Home
                                             </a>
                                             , <a className="page-scroll" href="#intro">
-                                                Intro
+                                                Introdução
                                             </a>
                                             , <a className="page-scroll" href="#features">
-                                                Features
+                                                Funcionalidades
                                             </a>
                                             , <a className="page-scroll" href="#details">
-                                                Details
+                                                Detalhes
+                                            </a>
+                                            , <a className="page-scroll" href="/register">
+                                                Cadastre-se
+                                            </a>
+                                            , <a className="page-scroll" href="/login">
+                                                Entre
                                             </a>
                                         </li>
                                     </ul>
@@ -694,8 +476,8 @@ function LandingPage() {
                                         </a>
                                     </span>
                                     <p className="p-small">
-                                        We would love to hear from you <a href="mailto:contact@site.com">
-                                            <strong>contact@site.com</strong>
+                                        Queremos ouvir sua opinião <a href="mailto:suporte.infraalerta@hotmail.com">
+                                            <strong>suporte.infraalerta@hotmail.com</strong>
                                         </a>
                                     </p>
                                 </div>
@@ -711,7 +493,7 @@ function LandingPage() {
                         <div className="row">
                             <div className="col-lg-12">
                                 <p className="p-small">
-                                    Copyright © <a href="#your-link">Your name</a>
+                                    Copyright © 2024 <a href="#your-link">InfraAlerta</a>
                                 </p>
                             </div>
                         </div>

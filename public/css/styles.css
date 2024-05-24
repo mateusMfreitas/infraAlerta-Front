@@ -181,9 +181,9 @@ a:hover {
 .btn-solid-reg {
 	display: inline-block;
 	padding: 1.375rem 2.25rem 1.375rem 2.25rem;
-	border: 1px solid #ff6c02;
+	border: 1px solid #3563E9;
 	border-radius: 32px;
-	background-color: #ff6c02;
+	background-color: #3563E9;
 	color: #ffffff;
 	font-weight: 600;
 	font-size: 0.875rem;
@@ -192,10 +192,37 @@ a:hover {
 	transition: all 0.2s;
 }
 
+#features {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 130px;
+}
+
+.cards-1 .container {
+	max-width: 1200px; /* Limite de largura do contêiner */
+	margin: 0 auto; /* Centralizar o contêiner */
+}
+
+.card {
+	margin: 10px; /* Espaçamento entre os cartões */
+}
+
+.h2-heading {
+	text-align: center;
+}
+
+.p-heading {
+	text-align: center;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
 .btn-solid-reg:hover {
-	border: 1px solid #ff6c02;
+	border: 1px solid #3563E9;
 	background-color: transparent;
-	color: #ff6c02; /* needs to stay here because of the color property of a tag */
+	color: #3563E9; /* needs to stay here because of the color property of a tag */
 	text-decoration: none;
 }
 
@@ -244,10 +271,10 @@ a:hover {
 .btn-outline-reg {
 	display: inline-block;
 	padding: 1.375rem 2.25rem 1.375rem 2.25rem;
-	border: 1px solid #ff6c02;
+	border: 1px solid #3563E9;
 	border-radius: 32px;
 	background-color: transparent;
-	color: #ff6c02;
+	color: #3563E9;
 	font-weight: 600;
 	font-size: 0.875rem;
 	line-height: 0;
@@ -256,7 +283,7 @@ a:hover {
 }
 
 .btn-outline-reg:hover {
-	background-color: #ff6c02;
+	background-color: #3563E9;
 	color: #ffffff;
 	text-decoration: none;
 }
@@ -408,9 +435,9 @@ input[type='checkbox'] {
 	display: inline-block;
 	width: 100%;
 	height: 3.25rem;
-	border: 1px solid #ff6c02;
+	border: 1px solid #3563E9;
 	border-radius: 32px;
-	background-color: #ff6c02;
+	background-color: #3563E9;
 	color: #ffffff;
 	font-weight: 600;
 	font-size: 0.875rem;
@@ -420,9 +447,9 @@ input[type='checkbox'] {
 }
 
 .form-control-submit-button:hover {
-	border: 1px solid #ff6c02;
+	border: 1px solid #3563E9;
 	background-color: transparent;
-	color: #ff6c02;
+	color: #ffffff;
 }
 
 /* Fade-move Animation For Details Lightbox - Magnific Popup */
@@ -588,6 +615,13 @@ input[type='checkbox'] {
 	margin-top: 0.125rem;
 	border: 1px solid #1e266d;
 	background-color: #1e266d;
+}
+
+.navbar .nav-item .btn-outline-sm{
+	margin-left: 10px;
+	border: 1px solid #1e266d;
+	background-color: transparent;
+	color: #1e266d;
 }
 
 .navbar .nav-item .btn-solid-sm:hover {
@@ -1231,6 +1265,7 @@ a:hover.back-to-top {
 		margin-left: -0.375rem;
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
+		border-radius: 0 30px 30px 0px; /* Canto superior esquerdo, superior direito, inferior direito, inferior esquerdo */
 	}
 	/* end of newsletter */
 
