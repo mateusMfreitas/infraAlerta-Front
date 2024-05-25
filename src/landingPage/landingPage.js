@@ -51,7 +51,7 @@ function LandingPage() {
                 {/* Navigation */}
                 <nav className="navbar navbar-expand-lg fixed-top navbar-light top-nav-collapse">
                     <div className="container">
-                        <a className="navbar-brand logo-image" href="index.html">
+                        <a className="navbar-brand logo-image" href="/">
                             <img src="images/logotexto.svg" alt="alternative"/>
                         </a>
                         <button className="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
