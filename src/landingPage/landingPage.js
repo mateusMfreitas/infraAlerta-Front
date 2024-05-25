@@ -1,5 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import Hotjar from '@hotjar/browser';
+
+const siteId = 4998457;
+const hotjarVersion = 6;
+
+Hotjar.init(siteId, hotjarVersion);
 
 function LandingPage() {
     return (
