@@ -4,7 +4,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import Layout from "../layout/layout";
 import "./graphics.css";
 
-function Graphics({chid}) {
+function Graphics({ chid }) {
   const userString = sessionStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
   const [chartType, setChartType] = useState("status");
@@ -17,7 +17,7 @@ function Graphics({chid}) {
     setChartType(event.target.value);
   };
 
-  const data = {
+  const dataStatus = {
     labels: ["Pendente", "Atribuido", "Finalizado"],
     datasets: [
       {
@@ -38,7 +38,7 @@ function Graphics({chid}) {
     ],
   };
 
-  const data1 = {
+  const dataNeighborhood = {
     labels: ["Campolim", "Centro", "Santa Rosália"],
     datasets: [
       {
@@ -75,40 +75,38 @@ function Graphics({chid}) {
 
   return (
     <>
-      <div className="layout">
-        <Layout />
-      </div>
+      <Layout>
+        <div className="content">
+          <h1 className="text-center my-4">Relatório</h1>
 
-      <div className="content">
-        <h1 className="text-center my-4">Relatório</h1>
+          <div className="button-container">
+            <button
+              className={`chart-button ${
+                chartType === "status" ? "selected" : ""
+              }`}
+              onClick={() => handleClick("status")}
+            >
+              Status
+            </button>
+            <button
+              className={`chart-button ${
+                chartType === "district" ? "selected" : ""
+              }`}
+              onClick={() => handleClick("district")}
+            >
+              Bairro
+            </button>
+          </div>
 
-        <div className="button-container">
-          <button
-            className={`chart-button ${
-              chartType === "status" ? "selected" : ""
-            }`}
-            onClick={() => handleClick("status")}
-          >
-            Status
-          </button>
-          <button
-            className={`chart-button ${
-              chartType === "district" ? "selected" : ""
-            }`}
-            onClick={() => handleClick("district")}
-          >
-            Bairro
-          </button>
+          <div className="chart-container">
+            {chartType === "status" ? (
+              <Doughnut data={dataStatus} options={options} />
+            ) : (
+              <Doughnut data={dataNeighborhood} options={options} />
+            )}
+          </div>
         </div>
-
-        <div className="chart-container">
-          {chartType === "status" ? (
-            <Doughnut data={data} options={options} />
-          ) : (
-            <Doughnut data={data1} options={options} />
-          )}
-        </div>
-      </div>
+      </Layout>
     </>
   );
 }
