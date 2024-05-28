@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import api from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/Logo.png';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 function Register() {
   const [name, setName] = useState('');
@@ -17,8 +18,8 @@ function Register() {
   const [district, setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
   function removeCpfFormatting(cpf) {
     return cpf.replace(/\D/g, ''); // Remove qualquer caractere que não seja dígito
@@ -50,14 +51,14 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     if (password !== confirmPassword){
-      /* console.log('Senhas não coincidem!'); */
-      return alert('Senhas não coincidem!');
+      setErrorMessage('Senhas não coincidem!');
+      return;
     }
 
     const unformattedCpf = removeCpfFormatting(cpf);
     const unformattedPhone = removePhoneFormatting(phone);
 
-    try{
+    try {
       const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}user/createUser`, {
         user: {
           name: name,
@@ -75,15 +76,13 @@ function Register() {
           ua_city: city,
           ua_state: state
         }
-      }).then((response) => {
-          console.log(response);
-          alert("Usuário criado!");
-          navigate('/login');
-        });
-        console.log(response);
-    } catch (error){
-        console.error(error);
-        alert("Erro ao criar conta!");
+      });
+      console.log(response);
+      /* alert("Usuário criado!"); */
+      navigate('/login');
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('Erro ao criar conta!');
     }
   };
 
@@ -97,6 +96,8 @@ function Register() {
           
           <h2 className="text-center mb-4">Registre sua conta</h2>
           
+          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
@@ -153,7 +154,7 @@ function Register() {
             </div>
           </div>
 
-          <button type="submit" className=" mt-3 btn btn-primary btn-block">Registre-se</button>
+          <button type="submit" className="mt-3 btn btn-primary btn-block">Registre-se</button>
           <p className="text-center mt-3">
             <Link to="/login">Voltar para Login</Link>
           </p>
