@@ -27,7 +27,7 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+    <div style={{backgroundColor: "#050A24" }} className="d-flex justify-content-center align-items-center vh-100">
       <div className="card p-4 shadow" style={{ maxWidth: "400px", width: "100%" }}>
         <form onSubmit={handleSubmit} className="d-flex flex-column">
         
