@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importação do CSS do Bootstrap
-import api from '../services/api'; // Importação da API
+import 'bootstrap/dist/css/bootstrap.min.css';
+import api from '../services/api';
 import logo from '../assets/Logo.png';
+import { Alert } from 'react-bootstrap';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try{
-      const response = await api.post('http://localhost:5025/login/forgotPassword', {
+    try {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}login/forgotPassword`, {
         email: email
-      }).then((response) => {
-        // teste
-        alert(response);
-      })
+      });
       console.log(`email: ${email}`);
-    } catch (error){
+      setSuccessMessage('Email de recuperação enviado com sucesso!');
+      setErrorMessage('');
+    } catch (error) {
       console.error(error);
-      // teste
-      alert("Erro ao enviar email!");
+      setErrorMessage('Erro ao enviar email!');
+      setSuccessMessage('');
     }
   };
 
@@ -32,9 +34,13 @@ function ForgotPassword() {
           <div className="text-center">
             <img src={logo} alt="InfraAlerta" width="150" />  
           </div>
-                 
+          
           <h2 className="text-center mb-2">Redefina sua senha</h2>
-          <h6 className="text-center  mt-3 mb-4">Digite o e-mail para qual deseja redefinir sua senha.</h6>
+          <h6 className="text-center mt-3 mb-4">Digite o e-mail para qual deseja redefinir sua senha.</h6>
+          
+          {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+          {successMessage && <Alert variant="success">{successMessage}</Alert>}
+          
           <div className="mb-3">
             <label htmlFor="email" className="form-label">E-mail</label>
             <input
