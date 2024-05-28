@@ -37,7 +37,7 @@ function Login() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
+    <div style={{backgroundColor: "#050A24" }} className="d-flex justify-content-center align-items-center vh-100">
       <div className="container">
         <div className="row justify-content-center mt-5">
           <div className="col-md-6">

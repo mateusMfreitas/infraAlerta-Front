@@ -87,7 +87,7 @@ function Register() {
   };
 
   return (
-    <div className="container vh-100 d-flex justify-content-center align-items-center">
+    <div style={{backgroundColor: "#050A24" }} className="d-flex justify-content-center align-items-center vh-100">
       <div className="w-100" style={{maxWidth: '600px'}}>
         <form onSubmit={handleSubmit} className="p-4 bg-white shadow rounded">
           <div className="text-center">
