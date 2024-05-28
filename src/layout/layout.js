@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faTriangleExclamation, faSheetPlastic } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faTriangleExclamation, faSheetPlastic, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/Logo.png';
 
 const Layout = ({ children }) => {
@@ -22,12 +22,17 @@ const Layout = ({ children }) => {
         navigate('/graphics'); 
     };
 
+    const handleLogout = () => {
+        sessionStorage.removeItem('user');
+        navigate('/login');
+    };
+
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand href="#home"><a className="navbar-brand" href="/report">
-              <img src={logo} alt="logo infraAlerta" width={80} height={80} />
-            </a></Navbar.Brand>
+                    <img src={logo} alt="logo infraAlerta" width={80} height={80} />
+                </a></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
@@ -41,7 +46,11 @@ const Layout = ({ children }) => {
                             <FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios
                         </Nav.Link>
                     </Nav>
-                    {/* <img src={imageUser} alt="foto do usuário" width={80} height={80}/> */}
+                    <Nav>
+                        <Nav.Link onClick={handleLogout}>
+                            <FontAwesomeIcon icon={faSignOutAlt} className='mr-2 icon' />Sair
+                        </Nav.Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
             <div>
