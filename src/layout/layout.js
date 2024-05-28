@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faTriangleExclamation, faSheetPlastic, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/Logo.png';
 
 const Layout = ({ children }) => {
@@ -29,26 +27,24 @@ const Layout = ({ children }) => {
 
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="#home"><a className="navbar-brand" href="/report">
+            <Navbar expand="lg" bg='light' className="fixed-top top-nav-collapse" style={{ backgroundColor: '#3563E9' }}>
+                <Navbar.Brand href="/report" style={{ marginLeft: '20px' }}>
                     <img src={logo} alt="logo infraAlerta" width={80} height={80} />
-                </a></Navbar.Brand>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
+                    <Nav className="ml-auto">
                         <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/report'}>
-                            <FontAwesomeIcon icon={faHouse} className='mr-2 icon' />Home
+                            Home
                         </Nav.Link>
                         <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
-                            <FontAwesomeIcon icon={faTriangleExclamation} className='mr-2 icon' />Adicionar Relato
+                            Adicionar Relato
                         </Nav.Link>
                         <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/graphics'}>
-                            <FontAwesomeIcon icon={faSheetPlastic} className='mr-2 icon' />Relatórios
+                            Relatórios
                         </Nav.Link>
-                    </Nav>
-                    <Nav>
                         <Nav.Link onClick={handleLogout}>
-                            <FontAwesomeIcon icon={faSignOutAlt} className='mr-2 icon' />Sair
+                            Sair
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

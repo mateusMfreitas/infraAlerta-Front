@@ -3,35 +3,40 @@ import './report.css';
 import api from '../services/api';
 import Layout from '../layout/layout'; 
 
-
 function Report() {
-
   const [report, setReport] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   function handleRowClick(id) {
-    window.location=`/report/${id}`;
+    window.location = `/report/${id}`;
   }
+
   useEffect(() => {
-    async function getChamados(){
+    async function getChamados() {
       try {
-        const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/getProblems`)
-          .then((response) => {
-            console.log(response);
-            setReport(response.data);
-            sessionStorage.setItem('chamados', JSON.stringify(response.data));
-          })
+        const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/getProblems`);
+        console.log(response);
+        setReport(response.data);
+        sessionStorage.setItem('chamados', JSON.stringify(response.data));
+        setLoading(false);
       } catch (error) {
         console.error(error);
-        alert("Erro ao buscar chamados!");
+        setError("Erro ao buscar chamados!");
+        setLoading(false);
       }
     }
     getChamados();
   }, []);
 
   return (
-
-      <Layout>
-        <div className="col-md-9 text-center" style={{ justifyContent: 'center', width: '100%'}}>
+    <Layout>
+      <div className="col-md-9 text-center" style={{ justifyContent: 'center', width: '100%', marginTop: "110px"}}>
+        {loading ? (
+          <p>Carregando...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
           <table className="table table-striped">
             <thead>
               <tr>
@@ -52,8 +57,9 @@ function Report() {
               ))}
             </tbody>
           </table>
-        </div>
-      </Layout>
+        )}
+      </div>
+    </Layout>
   );
 }
 
