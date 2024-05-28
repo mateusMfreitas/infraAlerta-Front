@@ -74,7 +74,7 @@ function Problem() {
 
   return (
     <Layout>
-      <div className="body-content">
+      <div className="body-content padding-problem">
         {!sent ? ( // If not sent, display the form
           <form onSubmit={handleSubmit} className="Problem-form">
             <h1>REPORTAR SITUAÇÃO</h1>
