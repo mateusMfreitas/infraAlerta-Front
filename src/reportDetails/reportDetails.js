@@ -150,7 +150,7 @@ export function ReportDetails() {
                 src={report && report.problem ? report.problem['0'].pro_photo : ''}
                 width="430"
                 height="430"
-                className="img-fluid mb-3"
+                className="img-fluid mb-3 mx-auto d-block"
                 alt="Imagem do relato"
               />
             </div>
