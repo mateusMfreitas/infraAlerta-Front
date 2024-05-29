@@ -1,0 +1,72 @@
+#content-details {
+    margin-top: 80px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .card h1, .card h3 {
+    color: #333;
+  }
+  
+  .card p {
+    color: #666;
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }
+  
+  .img-fluid {
+    border-radius: 10px;
+  }
+  
+  .table {
+    margin-top: 20px;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  /* Define a fixed height for the comments section and make it scrollable */
+  .comments-section {
+    min-height: 452px;
+    max-height: 452px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .actions-section .btn {
+    margin: 10px;
+  }
+  
+  .actions-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilo para o modal de exclusão */
+  .modal.d-block {
+    display: block !important;
+  }
+  
+  /* Centralizar o modal de exclusão */
+  .modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 1rem);
+  }
+  
+  /* Classe para aplicar o desfoque ao fundo */
+  .blur-background {
+    filter: blur(5px);
+    transition: filter 0.3s ease-in-out;
+  }
+  
