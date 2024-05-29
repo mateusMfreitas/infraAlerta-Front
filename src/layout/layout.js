@@ -14,7 +14,6 @@ const Layout = ({ children }) => {
 
     const redirecionarInicio = () => {
         const user = JSON.parse(sessionStorage.getItem('user'));
-        console.log(user.admin);
         if (user.admin  === true) {
             navigate('/report');
         } else {
