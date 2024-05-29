@@ -13,7 +13,12 @@ const Layout = ({ children }) => {
     };
 
     const redirecionarInicio = () => {
-        navigate('/report'); 
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        if (user.admin  === true) {
+            navigate('/report');
+        } else {
+            navigate('/uDashboard');
+        }
     };
 
     const redirecionarRelatorio = () => {
@@ -28,13 +33,13 @@ const Layout = ({ children }) => {
     return (
         <div>
             <Navbar expand="lg" bg='light' className="fixed-top top-nav-collapse" style={{ backgroundColor: '#3563E9' }}>
-                <Navbar.Brand href="/report" style={{ marginLeft: '20px' }}>
-                    <img src={logo} alt="logo infraAlerta" width={80} height={80} />
+                <Navbar.Brand href="#" style={{ marginLeft: '20px' }}>
+                    <img src={logo} alt="logo infraAlerta" width={80} height={80} onClick={redirecionarInicio}/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/report'}>
+                        <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/report' || location.pathname === '/uDashboard'}>
                             Home
                         </Nav.Link>
                         <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
