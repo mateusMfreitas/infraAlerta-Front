@@ -87,17 +87,19 @@ function Problem() {
             let street = '';
 
             addressComponents.forEach(component => {
-              if (component.types.includes('neighborhood')) {
+              if (component.types.includes('sublocality')) {
                 neighborhood = component.long_name;
               }
               if (component.types.includes('route')) {
                 street = component.long_name;
               }
+              if (component.types.includes('street_number')) {
+                setPa_number(component.long_name);
+              }
             });
 
             setPa_address(street);
             setPa_neighborhood(neighborhood);
-            console.log(address);
           } else {
             alert("Não foi possível obter o endereço a partir da localização.");
           }
