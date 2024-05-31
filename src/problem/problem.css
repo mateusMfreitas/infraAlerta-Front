@@ -80,6 +80,7 @@
   .success-message button {
     padding: 10px 20px;
     background-color: #f8f8f8; 
+    color: #050A24;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -97,5 +98,12 @@
   body:not(.Problem) {
     background-color: #050A24;
   }
+
+  .pt-navbar {
+    padding-top: 120px; /* Ajuste o valor conforme necessário */
+  }
+
+  
+  
   
   
