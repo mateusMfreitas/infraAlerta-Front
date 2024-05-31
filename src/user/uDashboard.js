@@ -3,6 +3,7 @@ import './uDashboard.css';
 import api from '../services/api';
 import Layout from '../layout/layout'; 
 import { useNavigate } from 'react-router-dom';
+import Loading from 'react-loading';
 
 function UDashboard() {
     const navigate = useNavigate();
@@ -38,7 +39,9 @@ function UDashboard() {
         <Layout>
             <div className="col-md-9 text-center" style={{ justifyContent: 'center', width: '100%', marginTop: "110px"}}>
                 {loading ? (
-                    <p>Carregando...</p>
+                    <div className="loading-container">
+                        <Loading type="spinningBubbles" color="#000" />
+                    </div>
                 ) : error ? (
                     <p>{error}</p>
                 ) : (
