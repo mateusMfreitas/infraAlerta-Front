@@ -89,7 +89,7 @@ export function ReportDetails() {
 
   return (
     <Layout>
-      <div style={{paddingTop: "80px"}} className={`container mt-5 ${showDeleteModal ? 'blur-background' : ''}`} id="content-details">
+      <div className={`container mt-5 pt-navbar ${showDeleteModal ? 'blur-background' : ''}`} id="content-details">
         <div className="card shadow-sm p-4">
           <h1 className="text-center mb-4">#{report && report.problem ? report.problem['0'].pro_id : '...'} - {report && report.problem ? report.problem['0'].pro_name : '...'}</h1>
           <div className="row">
