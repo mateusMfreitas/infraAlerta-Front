@@ -129,6 +129,41 @@ export function ReportDetails() {
 
   return (
     <Layout>
+      {/* Modal de Exclusão */}
+      <div className={`modal ${showDeleteModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmar Exclusão</h5>
+              </div>
+              <div className="modal-body">
+                <p>Tem certeza que deseja excluir este chamado?</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={handleCancelDelete}>Cancelar</button>
+                <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Excluir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Modal de Finalização */}
+        <div className={`modal ${showFinalizeModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmar Finalização</h5>
+              </div>
+              <div className="modal-body">
+                <p>Tem certeza que deseja finalizar este chamado?</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={handleCancelFinalize}>Cancelar</button>
+                <button type="button" className="btn btn-success" onClick={handleConfirmFinalize}>Finalizar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       <div className={`container mt-5 pt-navbar ${showDeleteModal || showFinalizeModal ? 'blur-background' : ''}`} id="content-details">
         {(!report || !user) && (
           <div className="loading-container">
@@ -252,42 +287,6 @@ export function ReportDetails() {
             </div>
           </div>
         )}
-
-        {/* Modal de Exclusão */}
-        <div className={`modal ${showDeleteModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmar Exclusão</h5>
-              </div>
-              <div className="modal-body">
-                <p>Tem certeza que deseja excluir este chamado?</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={handleCancelDelete}>Cancelar</button>
-                <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Excluir</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Modal de Finalização */}
-        <div className={`modal ${showFinalizeModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmar Finalização</h5>
-              </div>
-              <div className="modal-body">
-                <p>Tem certeza que deseja finalizar este chamado?</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={handleCancelFinalize}>Cancelar</button>
-                <button type="button" className="btn btn-success" onClick={handleConfirmFinalize}>Finalizar</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </Layout>
   );
