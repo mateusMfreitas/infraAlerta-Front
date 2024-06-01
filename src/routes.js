@@ -10,6 +10,7 @@ import ADashboard from "./admin/aDashboard"
 import Graphics from "./graphics/graphics";
 import LandingPage from "./landingPage/landingPage";
 import { withAuth } from "./auth/auth";
+import Reports from "./reports/reports";
 
 const ProtectedProblem = withAuth(Problem);
 const ProtectedReport = withAuth(Report);
@@ -17,6 +18,7 @@ const ProtectedReportDetails = withAuth(ReportDetails);
 const ProtectedUDashboard = withAuth(UDashboard);
 const ProtectedADashboard = withAuth(ADashboard);
 const ProtectedGraphics = withAuth(Graphics);
+const ProtectedReports = withAuth(Reports);
 
 
 function AppRoutes() {
@@ -33,6 +35,7 @@ function AppRoutes() {
                 <Route path="/uDashboard" element={<ProtectedUDashboard/>} />
                 <Route path="/aDashboard" element={<ProtectedADashboard/>} />
                 <Route path="/graphics" element={<ProtectedGraphics/>}/>
+                <Route path="/reports" element={<ProtectedReports />} />
             </Routes>
         </BrowserRouter>
     );
