@@ -1,0 +1,68 @@
+.Reports {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.padding-reports {
+    padding-top: 130px; /* Ajuste este valor conforme a altura da sua navbar */
+}
+
+.Reports-form {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 992px) {
+    .Reports-form {
+        width: 90%;
+    }
+}
+
+.Reports-form h1 {
+    margin-bottom: 20px;
+}
+
+.table-container {
+    margin-top: 30px;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 20px;
+}
+
+body {
+    position: relative;
+}
+
+body:not(.Reports) {
+    background-color: #050A24;
+}
+
+.pt-navbar {
+    padding-top: 120px; /* Ajuste o valor conforme necessário */
+}
+
+/* reports.css */
+.table-left {
+    text-align: left;
+  }
+  
+  .table-right {
+    text-align: right;
+  }
+  

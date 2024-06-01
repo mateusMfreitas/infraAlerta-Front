@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
     };
 
     const redirecionarRelatorio = () => {
-        navigate('/graphics'); 
+        navigate('/reports'); 
     };
 
     const handleLogout = () => {
@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
                         <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
                             Adicionar Relato
                         </Nav.Link>
-                        <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/graphics'}>
+                        <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/reports'}>
                             Relatórios
                         </Nav.Link>
                         <Nav.Link onClick={handleLogout}>
