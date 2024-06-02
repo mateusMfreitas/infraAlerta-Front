@@ -3,11 +3,13 @@ import './report.css';
 import api from '../services/api';
 import Layout from '../layout/layout'; 
 import Loading from 'react-loading';
+import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 
 function Report() {
   const [report, setReport] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
   function handleRowClick(id) {
     window.location = `/report/${id}`;
@@ -30,6 +32,30 @@ function Report() {
     getChamados();
   }, []);
 
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedReport = [...report].sort((a, b) => {
+    const aValue = String(a[sortConfig.key]);
+    const bValue = String(b[sortConfig.key]);
+
+    if (aValue && bValue) {
+      if (sortConfig.direction === 'ascending') {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
+    } else {
+      // Se algum dos valores for indefinido, mantenha a ordem atual
+      return 0;
+    }
+  });
+
   return (
     <Layout>
       <div className="col-md-9 text-center" style={{ justifyContent: 'center', width: '100%', marginTop: "110px"}}>
@@ -43,19 +69,46 @@ function Report() {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th scope="col">Código</th>
-                <th scope="col">Classificação</th>
-                <th scope="col">Assunto</th>
-                <th scope="col">Relator</th>
+                <th scope="col" onClick={() => handleSort('pro_id')}>
+                  Código
+                  {sortConfig.key === 'pro_id' && sortConfig.direction === 'ascending' && <FaSortUp />}
+                  {sortConfig.key === 'pro_id' && sortConfig.direction === 'descending' && <FaSortDown />}
+                  {sortConfig.key !== 'pro_id' && <FaSort />}
+                </th>
+                <th scope="col" onClick={() => handleSort('pro_user')}>
+                  Relator
+                  {sortConfig.key === 'pro_user' && sortConfig.direction === 'ascending' && <FaSortUp />}
+                  {sortConfig.key === 'pro_user' && sortConfig.direction === 'descending' && <FaSortDown />}
+                  {sortConfig.key !== 'pro_user' && <FaSort />}
+                </th>
+                <th scope="col" onClick={() => handleSort('pro_classification')}>
+                  Classificação
+                  {sortConfig.key === 'pro_classification' && sortConfig.direction === 'ascending' && <FaSortUp />}
+                  {sortConfig.key === 'pro_classification' && sortConfig.direction === 'descending' && <FaSortDown />}
+                  {sortConfig.key !== 'pro_classification' && <FaSort />}
+                </th>
+                <th scope="col" onClick={() => handleSort('pro_name')}>
+                  Assunto
+                  {sortConfig.key === 'pro_name' && sortConfig.direction === 'ascending' && <FaSortUp />}
+                  {sortConfig.key === 'pro_name' && sortConfig.direction === 'descending' && <FaSortDown />}
+                  {sortConfig.key !== 'pro_name' && <FaSort />}
+                </th>
+                <th scope="col" onClick={() => handleSort('pro_status')}>
+                  Status
+                  {sortConfig.key === 'pro_status' && sortConfig.direction === 'ascending' && <FaSortUp />}
+                  {sortConfig.key === 'pro_status' && sortConfig.direction === 'descending' && <FaSortDown />}
+                  {sortConfig.key !== 'pro_status' && <FaSort />}
+                </th>
               </tr>
             </thead>
             <tbody>
-              {report.map((item) => (
+              {sortedReport.map((item) => (
                 <tr key={item.pro_id} onClick={() => handleRowClick(item.pro_id)} style={{ cursor: 'pointer' }}>
                   <th scope="row">#{item.pro_id}</th>
+                  <td>{item.pro_user}</td>
                   <td>{item.pro_classification}</td>
                   <td>{item.pro_name}</td>
-                  <td>{item.pro_user}</td>
+                  <td>{item.pro_status}</td>
                 </tr>
               ))}
             </tbody>
