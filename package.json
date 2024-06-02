@@ -13,6 +13,8 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-chartjs-2": "^5.2.0",

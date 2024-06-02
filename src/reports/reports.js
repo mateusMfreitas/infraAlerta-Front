@@ -4,6 +4,10 @@ import './reports.css';
 import api from '../services/api';
 import Layout from '../layout/layout';
 import Loading from 'react-loading';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import 'jspdf-autotable';
+
 
 function Reports() {
   const [neighborhoodReport, setNeighborhoodReport] = useState([]);
@@ -12,7 +16,8 @@ function Reports() {
   const [statusReport, setStatusReport] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [generatingReport, setGeneratingReport] = useState(false);
+  
   useEffect(() => {
     async function getReports() {
       try {
@@ -47,6 +52,37 @@ function Reports() {
     getReports();
   }, []);
 
+  // função para gerar o relatório em PDF
+  const generatePDFReport = () => {
+    setGeneratingReport(true);
+
+    // Cria um novo documento PDF
+    const doc = new jsPDF();
+
+    // Adiciona os dados das tabelas ao PDF
+    addDataToPDF(doc, neighborhoodReport, 'Bairros com mais Chamados');
+    addDataToPDF(doc, userReport, 'Usuários que mais Reportaram');
+    addDataToPDF(doc, typesReport, 'Tipos de Problemas mais Comuns');
+    addDataToPDF(doc, statusReport, 'Status dos Chamados');
+
+    // Salva o documento PDF
+    doc.save('relatorio.pdf');
+
+    // Finaliza a geração do relatório
+    setGeneratingReport(false);
+  };
+
+    // função para adicionar dados de uma tabela ao PDF
+    const addDataToPDF = (doc, data, title) => {
+      const startY = doc.autoTable.previous.finalY || 10;
+      doc.text(title, 10, startY + 10);
+      doc.autoTable({
+        startY: startY + 20,
+        head: [['Bairro', 'Quantidade de Chamados']],
+        body: data.map(item => [item.neighborhood || item.user || item.type || item.status, item.count]),
+      });
+    };
+
   return (
     <Layout>
       <div className="container pt-navbar">
@@ -60,7 +96,7 @@ function Reports() {
           <div className="Reports-form">
             <h1 className="text-center mb-4">Relatórios</h1>
             <div className="table-container">
-              <h3>Bairros com Mais Chamados</h3>
+              <h3>Bairros com mais Chamados</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -79,7 +115,7 @@ function Reports() {
               </table>
             </div>
             <div className="table-container">
-              <h3>Usuários que Mais Reportaram</h3>
+              <h3>Usuários que mais Reportaram</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -98,7 +134,7 @@ function Reports() {
               </table>
             </div>
             <div className="table-container">
-              <h3>Tipos de Problemas Mais Comuns</h3>
+              <h3>Tipos de Problemas mais Comuns</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -134,6 +170,9 @@ function Reports() {
                   ))}
                 </tbody>
               </table>
+              <button className="btn btn-primary" onClick={generatePDFReport}>
+              Gerar Relatório em PDF
+            </button>
             </div>
           </div>
         )}
