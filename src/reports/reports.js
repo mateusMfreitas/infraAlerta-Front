@@ -96,7 +96,7 @@ function Reports() {
           <div className="Reports-form">
             <h1 className="text-center mb-4">Relatórios</h1>
             <div className="table-container">
-              <h3>Bairros com mais Chamados</h3>
+              <h3>Bairros com mais relatos</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -115,7 +115,7 @@ function Reports() {
               </table>
             </div>
             <div className="table-container">
-              <h3>Usuários que mais Reportaram</h3>
+              <h3>Usuários que mais reportaram</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -134,7 +134,7 @@ function Reports() {
               </table>
             </div>
             <div className="table-container">
-              <h3>Tipos de Problemas mais Comuns</h3>
+              <h3>Relatos mais comuns</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -153,7 +153,7 @@ function Reports() {
               </table>
             </div>
             <div className="table-container">
-              <h3>Status dos Chamados</h3>
+              <h3>Status dos relatos</h3>
               <table className="table table-striped">
                 <thead>
                   <tr>
