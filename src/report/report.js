@@ -19,9 +19,16 @@ function Report() {
     async function getChamados() {
       try {
         const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/getProblems`);
-        console.log(response);
-        setReport(response.data);
-        sessionStorage.setItem('chamados', JSON.stringify(response.data));
+        const problems = response.data;
+
+        // Obter detalhes do usuário para cada chamado
+        const updatedProblems = await Promise.all(problems.map(async (problem) => {
+          const userResponse = await getUserDetails(problem.pro_user);
+          return { ...problem, pro_user: userResponse.name };
+        }));
+
+        setReport(updatedProblems);
+        sessionStorage.setItem('chamados', JSON.stringify(updatedProblems));
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -29,6 +36,17 @@ function Report() {
         setLoading(false);
       }
     }
+
+    async function getUserDetails(userId) {
+      try {
+        const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}user/getUser/${userId}`);
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Erro ao buscar detalhes do usuário!");
+      }
+    }
+
     getChamados();
   }, []);
 

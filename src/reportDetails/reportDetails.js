@@ -25,17 +25,29 @@ export function ReportDetails() {
       setUser(user);
       try {
         const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/getProblem/${id}`);
-        setReport(response.data);
+        const reportData = response.data;
 
         // Obter coordenadas a partir do endereço
-        if (response.data.problemAddress) {
-          const address = `${response.data.problemAddress[0].pa_number} ${response.data.problemAddress[0].pa_address}, ${response.data.problemAddress[0].pa_neighborhood}, ${response.data.problemAddress[0].pa_city}, ${response.data.problemAddress[0].pa_state}`;
+        if (reportData.problemAddress) {
+          const address = `${reportData.problemAddress[0].pa_number} ${reportData.problemAddress[0].pa_address}, ${reportData.problemAddress[0].pa_neighborhood}, ${reportData.problemAddress[0].pa_city}, ${reportData.problemAddress[0].pa_state}`;
           getCoordinates(address);
         }
 
-        /* // Obter comentários
-        const commentsResponse = await api.get(`http://localhost:5025/problem/getComments/${id}`);
-        setComments(commentsResponse.data); */
+        // Obter detalhes do usuário
+        if (reportData.problem[0].pro_user) {
+          const userId = reportData.problem[0].pro_user;
+          const userDetails = await getUserDetails(userId);
+          reportData.problem[0].pro_user = userDetails.name; // Assumindo que 'name' é o campo do nome do usuário
+          reportData.problem[0].pro_user_phone = userDetails.phone; // Adicionando o telefone do usuário
+          reportData.problem[0].pro_user_email = userDetails.email; // Adicionando o email do usuário, se necessário
+          
+        }
+
+        setReport(reportData);
+
+        // Obter comentários
+        // const commentsResponse = await api.get(`http://localhost:5025/problem/getComments/${id}`);
+        // setComments(commentsResponse.data);
       } catch (error) {
         console.error(error);
         alert("Erro ao buscar o chamado!");
@@ -43,6 +55,7 @@ export function ReportDetails() {
     }
     getChamado();
   }, [id]);
+
 
   const getCoordinates = async (address) => {
     const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -58,6 +71,16 @@ export function ReportDetails() {
     } catch (error) {
       console.error(error);
       alert("Erro ao obter a localização!");
+    }
+  };
+
+  const getUserDetails = async (userId) => {
+    try {
+      const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}user/getUser/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao buscar detalhes do usuário!");
     }
   };
 
@@ -184,11 +207,11 @@ export function ReportDetails() {
                     </tr>
                     <tr>
                       <th>Celular</th>
-                      <td>phone</td>
+                      <td>{report.problem[0].pro_user_phone}</td>
                     </tr>
                     <tr>
                       <th>Email</th>
-                      <td>email</td>
+                      <td>{report.problem[0].pro_user_email}</td>
                     </tr>
                     <tr>
                       <th>Assunto</th>
