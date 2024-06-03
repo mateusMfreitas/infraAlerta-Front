@@ -8,7 +8,6 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
 
-
 function Reports() {
   const [neighborhoodReport, setNeighborhoodReport] = useState([]);
   const [userReport, setUserReport] = useState([]);
@@ -25,21 +24,26 @@ function Reports() {
         const userResponse = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/report/users`);
         const typesResponse = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/report/types`);
         const statusResponse = await api.get(`${process.env.REACT_APP_API_BASE_URL}problem/report/status`);
-        console.log(statusResponse.data);
-
+        
         // Ajustando a atribuição dos dados ao estado
         if (neighborhoodResponse.data && Array.isArray(neighborhoodResponse.data.neighborhoods)) {
           setNeighborhoodReport(neighborhoodResponse.data.neighborhoods);
         }
         if (userResponse.data && Array.isArray(userResponse.data.users)) {
-          setUserReport(userResponse.data.users);
+          // Trocar IDs por nomes de usuário
+          const usersWithNames = await Promise.all(
+            userResponse.data.users.map(async (item) => {
+              const userDetails = await getUserDetails(item.user);
+              return { ...item, user: userDetails.name }; // Assumindo que 'name' é o campo do nome do usuário
+            })
+          );
+          setUserReport(usersWithNames);
         }
         if (typesResponse.data && Array.isArray(typesResponse.data.types)) {
           setTypesReport(typesResponse.data.types);
         }
         if (statusResponse.data && Array.isArray(statusResponse.data.statuses)) {
           setStatusReport(statusResponse.data.statuses);
-          console.log(statusReport);
         }
 
         setLoading(false);
@@ -51,6 +55,16 @@ function Reports() {
     }
     getReports();
   }, []);
+
+  const getUserDetails = async (userId) => {
+    try {
+      const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}user/getUser/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao buscar detalhes do usuário!");
+    }
+  };
 
   // função para gerar o relatório em PDF
   const generatePDFReport = () => {
@@ -72,16 +86,16 @@ function Reports() {
     setGeneratingReport(false);
   };
 
-    // função para adicionar dados de uma tabela ao PDF
-    const addDataToPDF = (doc, data, title) => {
-      const startY = doc.autoTable.previous.finalY || 10;
-      doc.text(title, 10, startY + 10);
-      doc.autoTable({
-        startY: startY + 20,
-        head: [['Bairro', 'Quantidade de Chamados']],
-        body: data.map(item => [item.neighborhood || item.user || item.type || item.status, item.count]),
-      });
-    };
+  // função para adicionar dados de uma tabela ao PDF
+  const addDataToPDF = (doc, data, title) => {
+    const startY = doc.autoTable.previous.finalY || 10;
+    doc.text(title, 10, startY + 10);
+    doc.autoTable({
+      startY: startY + 20,
+      head: [['Bairro', 'Quantidade de Chamados']],
+      body: data.map(item => [item.neighborhood || item.user || item.type || item.status, item.count]),
+    });
+  };
 
   return (
     <Layout>
