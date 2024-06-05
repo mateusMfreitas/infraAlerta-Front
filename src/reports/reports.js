@@ -7,6 +7,7 @@ import Loading from 'react-loading';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
 import logo from '../assets/Logo.png'; // Assumindo que a logo está na pasta assets
 
 function Reports() {
@@ -17,7 +18,7 @@ function Reports() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [generatingReport, setGeneratingReport] = useState(false);
-  
+
   useEffect(() => {
     async function getReports() {
       try {
@@ -128,6 +129,24 @@ function Reports() {
     return doc.autoTable.previous.finalY + 10; // Retorna a posição Y final da tabela para evitar sobreposição
   };
 
+  // função para gerar o relatório em Excel
+  const generateExcelReport = () => {
+    const workbook = XLSX.utils.book_new();
+
+    const addSheetToWorkbook = (data, sheetName, headers) => {
+      const worksheetData = [headers, ...data.map(item => [item.neighborhood || item.user || item.type || item.status, item.count])];
+      const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+    };
+
+    addSheetToWorkbook(neighborhoodReport, 'Bairros com mais chamados', ['Bairro', 'Quantidade de Chamados']);
+    addSheetToWorkbook(userReport, 'Usuários que mais reportaram', ['Usuário', 'Quantidade de Chamados']);
+    addSheetToWorkbook(typesReport, 'Tipos de Problemas mais comuns', ['Tipo de Problema', 'Quantidade de Chamados']);
+    addSheetToWorkbook(statusReport, 'Status dos chamados', ['Status', 'Quantidade de Chamados']);
+
+    XLSX.writeFile(workbook, 'relatorio.xlsx');
+  };
+
   return (
     <Layout>
       <div className="container pt-navbar">
@@ -215,9 +234,16 @@ function Reports() {
                   ))}
                 </tbody>
               </table>
-              <button className="btn btn-primary" onClick={generatePDFReport}>
-                Gerar Relatório em PDF
-              </button>
+              <div className="btn-group">
+                <button className="btn btn-danger me-2" onClick={generatePDFReport}>
+                  Gerar Relatório em PDF
+                </button>
+              </div>
+              <div className="btn-group">
+                <button className="btn btn-success" onClick={generateExcelReport}>
+                  Gerar Relatório em Excel
+                </button>
+              </div>
             </div>
           </div>
         )}
