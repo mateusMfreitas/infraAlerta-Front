@@ -18,6 +18,7 @@ export function ReportDetails() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showFinalizeModal, setShowFinalizeModal] = useState(false);
   const [mapUrl, setMapUrl] = useState('');
+  const [loading, setLoading] = useState(true); // Estado de carregamento
 
   useEffect(() => {
     async function getChamado() {
@@ -59,9 +60,11 @@ export function ReportDetails() {
         }));
 
         setComments(commentsWithUserDetails);
+        setLoading(false); // Define o carregamento como falso após carregar os dados
       } catch (error) {
         console.error(error);
         alert("Erro ao buscar o chamado!");
+        setLoading(false); // Define o carregamento como falso em caso de erro
       }
     }
     getChamado();
@@ -220,12 +223,11 @@ export function ReportDetails() {
         </div>
       </div>
       <div className={`container mt-5 pt-navbar ${showDeleteModal || showFinalizeModal ? 'blur-background' : ''}`} id="content-details">
-        {(!report || !user) && (
+        {loading ? (
           <div className="loading-container">
             <Loading type="spinningBubbles" color="#000" />
           </div>
-        )}
-        {report && user && (
+        ) : (
           <div className="card shadow-sm p-4">
             <h1 className="text-center mb-4">#{report.problem[0].pro_id} - {report.problem[0].pro_name}</h1>
             <div className="row">
