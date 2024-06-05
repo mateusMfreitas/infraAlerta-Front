@@ -7,6 +7,8 @@ import Loading from 'react-loading';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+import logo from '../assets/Logo.png'; // Assumindo que a logo está na pasta assets
 
 function Reports() {
   const [neighborhoodReport, setNeighborhoodReport] = useState([]);
@@ -16,7 +18,7 @@ function Reports() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [generatingReport, setGeneratingReport] = useState(false);
-  
+
   useEffect(() => {
     async function getReports() {
       try {
@@ -73,11 +75,35 @@ function Reports() {
     // Cria um novo documento PDF
     const doc = new jsPDF();
 
+    // Adiciona o cabeçalho ao PDF
+    const logoWidth = 30;
+    const logoHeight = 30;
+    const logoX = 10;
+    const logoY = 10;
+
+    // Adiciona a imagem da logo ao PDF
+    doc.addImage(logo, 'PNG', logoX, logoY, logoWidth, logoHeight);
+
+    // Adiciona o título do sistema e o título do relatório
+    doc.setFontSize(22);
+    doc.setTextColor(40);
+    doc.setFont('helvetica', 'bold');
+    doc.text('InfraAlerta', logoX + logoWidth + 10, logoY + 20);
+    doc.setFontSize(16);
+    doc.setTextColor(100);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Relatórios', logoX + logoWidth + 10, logoY + 30);
+
+    // Adiciona uma linha divisória
+    doc.setLineWidth(0.5);
+    doc.line(10, logoY + logoHeight + 10, 200, logoY + logoHeight + 10);
+
     // Adiciona os dados das tabelas ao PDF
-    addDataToPDF(doc, neighborhoodReport, 'Bairros com mais Chamados');
-    addDataToPDF(doc, userReport, 'Usuários que mais Reportaram');
-    addDataToPDF(doc, typesReport, 'Tipos de Problemas mais Comuns');
-    addDataToPDF(doc, statusReport, 'Status dos Chamados');
+    let startY = logoY + logoHeight + 20;
+    startY = addDataToPDF(doc, neighborhoodReport, 'Bairros com mais chamados', ['Bairro', 'Quantidade de Chamados'], startY);
+    startY = addDataToPDF(doc, userReport, 'Usuários que mais reportaram', ['Usuário', 'Quantidade de Chamados'], startY);
+    startY = addDataToPDF(doc, typesReport, 'Tipos de Problemas mais comuns', ['Tipo de Problema', 'Quantidade de Chamados'], startY);
+    addDataToPDF(doc, statusReport, 'Status dos chamados', ['Status', 'Quantidade de Chamados'], startY);
 
     // Salva o documento PDF
     doc.save('relatorio.pdf');
@@ -87,14 +113,38 @@ function Reports() {
   };
 
   // função para adicionar dados de uma tabela ao PDF
-  const addDataToPDF = (doc, data, title) => {
-    const startY = doc.autoTable.previous.finalY || 10;
-    doc.text(title, 10, startY + 10);
+  const addDataToPDF = (doc, data, title, headers, startY) => {
+    doc.setFontSize(14);
+    doc.setTextColor(0);
+    doc.setFont('helvetica', 'bold');
+    doc.text(title, 10, startY);
     doc.autoTable({
-      startY: startY + 20,
-      head: [['Bairro', 'Quantidade de Chamados']],
+      startY: startY + 10,
+      head: [headers],
       body: data.map(item => [item.neighborhood || item.user || item.type || item.status, item.count]),
+      theme: 'grid',
+      styles: { fontSize: 10, cellPadding: 3 },
+      headStyles: { fillColor: [220, 220, 220] }
     });
+    return doc.autoTable.previous.finalY + 10; // Retorna a posição Y final da tabela para evitar sobreposição
+  };
+
+  // função para gerar o relatório em Excel
+  const generateExcelReport = () => {
+    const workbook = XLSX.utils.book_new();
+
+    const addSheetToWorkbook = (data, sheetName, headers) => {
+      const worksheetData = [headers, ...data.map(item => [item.neighborhood || item.user || item.type || item.status, item.count])];
+      const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+    };
+
+    addSheetToWorkbook(neighborhoodReport, 'Bairros com mais chamados', ['Bairro', 'Quantidade de Chamados']);
+    addSheetToWorkbook(userReport, 'Usuários que mais reportaram', ['Usuário', 'Quantidade de Chamados']);
+    addSheetToWorkbook(typesReport, 'Tipos de Problemas mais comuns', ['Tipo de Problema', 'Quantidade de Chamados']);
+    addSheetToWorkbook(statusReport, 'Status dos chamados', ['Status', 'Quantidade de Chamados']);
+
+    XLSX.writeFile(workbook, 'relatorio.xlsx');
   };
 
   return (
@@ -184,9 +234,16 @@ function Reports() {
                   ))}
                 </tbody>
               </table>
-              <button className="btn btn-primary" onClick={generatePDFReport}>
-              Gerar Relatório em PDF
-            </button>
+              <div className="btn-group">
+                <button className="btn btn-danger me-2" onClick={generatePDFReport}>
+                  Gerar Relatório em PDF
+                </button>
+              </div>
+              <div className="btn-group">
+                <button className="btn btn-success" onClick={generateExcelReport}>
+                  Gerar Relatório em Excel
+                </button>
+              </div>
             </div>
           </div>
         )}
