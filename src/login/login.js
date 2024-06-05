@@ -7,6 +7,7 @@ import { Container, Alert } from 'react-bootstrap';
 import logo from '../assets/Logo.png';
 import api from '../services/api';
 
+
 function Login() {
   const navigate = useNavigate();
 
@@ -74,6 +75,7 @@ function Login() {
                   />
                   <button
                     type="button"
+                    style={{margin: "0 0 0 0px"}}
                     className="btn btn-outline-secondary"
                     onClick={() => setShowPassword(!showPassword)}
                   >
