@@ -74,10 +74,10 @@ function Reports() {
     const doc = new jsPDF();
 
     // Adiciona os dados das tabelas ao PDF
-    addDataToPDF(doc, neighborhoodReport, 'Bairros com mais Chamados');
-    addDataToPDF(doc, userReport, 'Usuários que mais Reportaram');
-    addDataToPDF(doc, typesReport, 'Tipos de Problemas mais Comuns');
-    addDataToPDF(doc, statusReport, 'Status dos Chamados');
+    addDataToPDF(doc, neighborhoodReport, 'Bairros com mais chamados');
+    addDataToPDF(doc, userReport, 'Usuários que mais reportaram');
+    addDataToPDF(doc, typesReport, 'Tipos de Problemas mais comuns');
+    addDataToPDF(doc, statusReport, 'Status dos chamados');
 
     // Salva o documento PDF
     doc.save('relatorio.pdf');
