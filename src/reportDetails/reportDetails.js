@@ -14,6 +14,7 @@ export function ReportDetails() {
   const [report, setReport] = useState(null); // Inicialize como null para verificar o carregamento
   const [user, setUser] = useState(null); // Inicialize como null para verificar o carregamento
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState(''); // Novo estado para o comentário
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showFinalizeModal, setShowFinalizeModal] = useState(false);
   const [mapUrl, setMapUrl] = useState('');
@@ -40,14 +41,24 @@ export function ReportDetails() {
           reportData.problem[0].pro_user = userDetails.name; // Assumindo que 'name' é o campo do nome do usuário
           reportData.problem[0].pro_user_phone = userDetails.phone; // Adicionando o telefone do usuário
           reportData.problem[0].pro_user_email = userDetails.email; // Adicionando o email do usuário, se necessário
-          
         }
 
         setReport(reportData);
 
         // Obter comentários
-        // const commentsResponse = await api.get(`http://localhost:5025/problem/getComments/${id}`);
-        // setComments(commentsResponse.data);
+        const commentsResponse = await api.get(`${process.env.REACT_APP_API_BASE_URL}Comment/${id}`);
+        const commentsData = commentsResponse.data;
+
+        // Obter detalhes dos usuários dos comentários
+        const commentsWithUserDetails = await Promise.all(commentsData.map(async (comment) => {
+          if (comment.user_id) {
+            const userDetails = await getUserDetails(comment.user_id);
+            return { ...comment, user_name: userDetails.name, user_avatar: userDetails.avatar }; // Inclua o campo avatar
+          }
+          return comment;
+        }));
+
+        setComments(commentsWithUserDetails);
       } catch (error) {
         console.error(error);
         alert("Erro ao buscar o chamado!");
@@ -55,7 +66,6 @@ export function ReportDetails() {
     }
     getChamado();
   }, [id]);
-
 
   const getCoordinates = async (address) => {
     const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -81,6 +91,28 @@ export function ReportDetails() {
     } catch (error) {
       console.error(error);
       alert("Erro ao buscar detalhes do usuário!");
+    }
+  };
+
+  const handleAddComment = async () => {
+    if (newComment.trim() === '') return;
+
+    try {
+      const response = await api.post(`${process.env.REACT_APP_API_BASE_URL}Comment/${id}`, {
+        user_id: user.user_id,
+        content: newComment,
+      });
+
+      const addedComment = response.data;
+
+      const userDetails = await getUserDetails(user.user_id);
+      const commentWithUserDetails = { ...addedComment, user_name: userDetails.name, user_avatar: userDetails.avatar };
+
+      setComments([...comments, commentWithUserDetails]);
+      setNewComment('');
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao adicionar comentário!");
     }
   };
 
@@ -154,39 +186,39 @@ export function ReportDetails() {
     <Layout>
       {/* Modal de Exclusão */}
       <div className={`modal ${showDeleteModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmar Exclusão</h5>
-              </div>
-              <div className="modal-body">
-                <p>Tem certeza que deseja excluir este chamado?</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={handleCancelDelete}>Cancelar</button>
-                <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Excluir</button>
-              </div>
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Confirmar Exclusão</h5>
+            </div>
+            <div className="modal-body">
+              <p>Tem certeza que deseja excluir este chamado?</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" onClick={handleCancelDelete}>Cancelar</button>
+              <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>Excluir</button>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Modal de Finalização */}
-        <div className={`modal ${showFinalizeModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmar Finalização</h5>
-              </div>
-              <div className="modal-body">
-                <p>Tem certeza que deseja finalizar este chamado?</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={handleCancelFinalize}>Cancelar</button>
-                <button type="button" className="btn btn-success" onClick={handleConfirmFinalize}>Finalizar</button>
-              </div>
+      {/* Modal de Finalização */}
+      <div className={`modal ${showFinalizeModal ? 'd-block' : ''}`} tabIndex="-1" role="dialog">
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Confirmar Finalização</h5>
+            </div>
+            <div className="modal-body">
+              <p>Tem certeza que deseja finalizar este chamado?</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" onClick={handleCancelFinalize}>Cancelar</button>
+              <button type="button" className="btn btn-success" onClick={handleConfirmFinalize}>Finalizar</button>
             </div>
           </div>
         </div>
+      </div>
       <div className={`container mt-5 pt-navbar ${showDeleteModal || showFinalizeModal ? 'blur-background' : ''}`} id="content-details">
         {(!report || !user) && (
           <div className="loading-container">
@@ -261,13 +293,27 @@ export function ReportDetails() {
               <div className="col-md-6">
                 <h3 style={{ paddingTop: "2px", paddingBottom: "10px" }}>Comentários:</h3>
                 <div className="comments-section">
-                  <ul className="list-group mb-3">
+                  <ul className="list-group mb-3 comments-list">
                     {comments.length > 0 ? comments.map((comment, index) => (
-                      <li key={index} className="list-group-item">
-                        <strong>{comment.user_name}</strong>: {comment.comment_text}
+                      <li key={index} className="list-group-item comment-item">
+                        <div className="comment-header">
+                          <strong>{comment.user_name}</strong>
+                          <span className="comment-date">{new Date(comment.created_at).toLocaleDateString('pt-BR')}</span>
+                        </div>
+                        <p>{comment.comment_text}</p>
                       </li>
                     )) : <li className="list-group-item">Nenhum comentário disponível.</li>}
                   </ul>
+                  <div className="comment-input-container">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Adicionar um comentário..."
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                    />
+                    <button className="btn btn-primary" onClick={handleAddComment}>Enviar</button>
+                  </div>
                 </div>
                 <h3 style={{ paddingTop: "16px" }}>Localização:</h3>
                 <iframe
@@ -283,11 +329,6 @@ export function ReportDetails() {
 
               <div className="actions-section mt-3">
                 <div className="d-flex justify-content-center">
-                  <button className="btn btn-outline-dark mx-2" onClick={() => adicionarComentario(report.problem[0].pro_id)}>
-                    <FontAwesomeIcon icon={faMessage} />
-                    <br />
-                    Adicionar comentário
-                  </button>
                   <button className="btn btn-outline-dark mx-2" onClick={() => alterarResponsavel(report.problem[0].pro_id, user.user_id)} data-toggle="modal" data-target="#modalEdit">
                     <FontAwesomeIcon icon={faPenToSquare} />
                     <br />
