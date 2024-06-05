@@ -29,7 +29,7 @@ function Login() {
       if(!response.data.admin){
         navigate('/uDashboard');        
       }else{
-        navigate('/report');        
+        navigate('/aDashboard');        
       }
     } catch (error) {
       console.error(error);
