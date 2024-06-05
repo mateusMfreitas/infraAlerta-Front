@@ -297,12 +297,13 @@ export function ReportDetails() {
                 <div className="comments-section">
                   <ul className="list-group mb-3 comments-list">
                     {comments.length > 0 ? comments.map((comment, index) => (
+                      console.log(comment),
                       <li key={index} className="list-group-item comment-item">
                         <div className="comment-header">
                           <strong>{comment.user_name}</strong>
                           <span className="comment-date">{new Date(comment.created_at).toLocaleDateString('pt-BR')}</span>
                         </div>
-                        <p>{comment.comment_text}</p>
+                        <p>{comment.comments_text}</p>
                       </li>
                     )) : <li className="list-group-item">Nenhum comentário disponível.</li>}
                   </ul>
