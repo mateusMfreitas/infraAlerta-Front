@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
     const redirecionarInicio = () => {
         const user = JSON.parse(sessionStorage.getItem('user'));
         if (user && user.admin) {
-            navigate('/report');
+            navigate('/aDashboard');
         } else {
             navigate('/uDashboard');
         }
@@ -47,12 +47,17 @@ const Layout = ({ children }) => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/report' || location.pathname === '/uDashboard'}>
+                        <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/aDashboard' || location.pathname === '/uDashboard'}>
                             Home
                         </Nav.Link>
                         <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
                             Adicionar Relato
                         </Nav.Link>
+                        {isAdmin && (
+                            <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/report'}>
+                                Buscar Relatos
+                            </Nav.Link>
+                        )}
                         {isAdmin && (
                             <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/reports'}>
                                 Relatórios
