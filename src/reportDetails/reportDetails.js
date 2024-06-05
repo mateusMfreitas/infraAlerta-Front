@@ -331,22 +331,26 @@ export function ReportDetails() {
 
               <div className="actions-section mt-3">
                 <div className="d-flex justify-content-center">
-                  <button className="btn btn-outline-dark mx-2" onClick={() => alterarResponsavel(report.problem[0].pro_id, user.user_id)} data-toggle="modal" data-target="#modalEdit">
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                    <br />
-                    Alterar Responsável
-                    <br />
-                    <small>Responsável atual: {report.problem[0].pro_admin}</small>
-                  </button>
+                  {user && user.admin && (
+                    <>
+                      <button className="btn btn-outline-dark mx-2" onClick={() => alterarResponsavel(report.problem[0].pro_id, user.user_id)} data-toggle="modal" data-target="#modalEdit">
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                        <br />
+                        Alterar Responsável
+                        <br />
+                        <small>Responsável atual: {report.problem[0].pro_admin}</small>
+                      </button>
+                      <button className="btn btn-outline-dark mx-2" onClick={handleFinalizeClick}>
+                        <FontAwesomeIcon icon={faSquareCheck} />
+                        <br />
+                        Finalizar
+                      </button>
+                    </>
+                  )}
                   <button className="btn btn-outline-dark mx-2" onClick={handleDeleteClick}>
                     <FontAwesomeIcon icon={faTrashCan} />
                     <br />
                     Excluir
-                  </button>
-                  <button className="btn btn-outline-dark mx-2" onClick={handleFinalizeClick}>
-                    <FontAwesomeIcon icon={faSquareCheck} />
-                    <br />
-                    Finalizar
                   </button>
                 </div>
               </div>

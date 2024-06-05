@@ -29,6 +29,10 @@ const Layout = ({ children }) => {
         }
     };
 
+    const redirecionarReport = () => {
+        navigate('/report');
+    };
+
     const redirecionarRelatorio = () => {
         navigate('/reports'); 
     };
@@ -50,14 +54,14 @@ const Layout = ({ children }) => {
                         <Nav.Link onClick={redirecionarInicio} active={location.pathname === '/aDashboard' || location.pathname === '/uDashboard'}>
                             Home
                         </Nav.Link>
-                        <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
-                            Adicionar Relato
-                        </Nav.Link>
                         {isAdmin && (
-                            <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/report'}>
+                            <Nav.Link onClick={redirecionarReport} active={location.pathname === '/report'}>
                                 Buscar Relatos
                             </Nav.Link>
                         )}
+                        <Nav.Link onClick={redirecionarInserirChamado} active={location.pathname === '/problem'}>
+                            Adicionar Relato
+                        </Nav.Link>
                         {isAdmin && (
                             <Nav.Link onClick={redirecionarRelatorio} active={location.pathname === '/reports'}>
                                 Relatórios
